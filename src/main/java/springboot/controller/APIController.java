@@ -15,9 +15,11 @@ package springboot.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import springboot.dao.RecipientDAO;
@@ -26,8 +28,8 @@ import springboot.model.Recipient;
 import springboot.model.Sender;
 import springboot.service.OrderService;
 
-@RestController
-public class Controller {
+@Controller
+public class APIController {
 	
 	@Autowired
 	SenderDAO senderDao;
@@ -40,6 +42,7 @@ public class Controller {
 	 * returns the saved instance 
 	 */
 	@PostMapping("/setOrder/setSender")
+	@ResponseBody
 	public Sender setSender(@Valid @RequestBody Sender sender) {
 		if (sender.getOrderid() != null) return senderDao.save(sender);
 		OrderService order = new OrderService();
@@ -52,6 +55,7 @@ public class Controller {
 	 * returns the saved instance 
 	 */
 	@PostMapping("/setOrder/setRecipient")
+	@ResponseBody
 	public Recipient setRecipient(@Valid @RequestBody Recipient recipient) {
 		if (recipient.getOrderid() != null) return recipientDao.save(recipient);
 		OrderService order = new OrderService();
@@ -59,4 +63,8 @@ public class Controller {
 		return recipientDao.save(recipient);
 	}
 	
+	@RequestMapping("/trackOrder")
+	public String mapWebControl() {
+		return "TrackOrder";
+	}
 }

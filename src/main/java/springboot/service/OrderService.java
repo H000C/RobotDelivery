@@ -1,14 +1,3 @@
-/*
- * OrderService:
- *     provide logic functions necessary for ordering shipping
- *     
- * Functionalities:
- *     generating order id with a given sender recipient
- *     
- * Created by: Haochen Liu
- * Modified by: Haochen Liu
- */
-
 package springboot.service;
 
 import java.util.Date;
@@ -20,8 +9,6 @@ import springboot.model.Sender;
 
 @Service
 public class OrderService {
-	
-	// generating order id
 	public String generateOrder(Sender sender){
 		Date date = new Date();
 		long time = date.getTime();
@@ -30,7 +17,6 @@ public class OrderService {
 		return orderid;
 	}
 	
-	// generating order id
 	public String generateOrder(Recipient recipient){
 		Date date = new Date();
 		long time = date.getTime();
