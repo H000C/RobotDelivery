@@ -4,8 +4,9 @@
  *     automatic conversion between jsonObject and object
  *     
  * Requests:
- *      Post /setOrder/setSender
- *      Post /setOrder/setRecipient
+ *      Post /setOrder/setSender (return Sender)
+ *      Post /setOrder/setRecipient (return Recipient)
+ *      Get /trackOrder (return HTML)
  *     
  * Created by: Haochen Liu
  * Modified by: Haochen Liu
@@ -16,20 +17,21 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import springboot.dao.RecipientDAO;
 import springboot.dao.SenderDAO;
 import springboot.model.Recipient;
 import springboot.model.Sender;
+import springboot.service.OptionService;
 import springboot.service.OrderService;
 
 @Controller
-public class APIController {
+public class setController {
 	
 	@Autowired
 	SenderDAO senderDao;
@@ -45,8 +47,7 @@ public class APIController {
 	@ResponseBody
 	public Sender setSender(@Valid @RequestBody Sender sender) {
 		if (sender.getOrderid() != null) return senderDao.save(sender);
-		OrderService order = new OrderService();
-		sender.setOrderid(order.generateOrder(sender));
+		sender.setOrderid(OrderService.generateOrder(sender));
 		return senderDao.save(sender);
 	}
 	
@@ -58,11 +59,14 @@ public class APIController {
 	@ResponseBody
 	public Recipient setRecipient(@Valid @RequestBody Recipient recipient) {
 		if (recipient.getOrderid() != null) return recipientDao.save(recipient);
-		OrderService order = new OrderService();
-		recipient.setOrderid(order.generateOrder(recipient));
+		recipient.setOrderid(OrderService.generateOrder(recipient));
 		return recipientDao.save(recipient);
 	}
 	
+	/*
+	 * returns a HTML page under templates
+	 * which name is TrackOrder
+	 */
 	@RequestMapping("/trackOrder")
 	public String mapWebControl() {
 		return "TrackOrder";

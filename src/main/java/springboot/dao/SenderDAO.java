@@ -12,6 +12,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import springboot.external.BingMapAPI;
+import springboot.model.PointOnMap;
 import springboot.model.Sender;
 
 @Service
@@ -20,8 +22,12 @@ public class SenderDAO {
 	@Autowired
 	SenderRepository senderRepository;
 
-	/*to save a sender*/
+	/*to save a sender
+	 * also checks whether location is valid
+	 * */
 	public Sender save(Sender sender) {
+		PointOnMap geopoint = BingMapAPI.findLocation(sender.getAddress());
+		sender.setAddress(geopoint.getAddress());
 		return senderRepository.save(sender);
 	} 
 	
