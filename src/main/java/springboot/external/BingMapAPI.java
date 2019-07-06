@@ -89,7 +89,8 @@ public class BingMapAPI {
 	/* takes 2 address and a enabling boolean, return information of a route as a JsonObject
 	 * {
 	 *     "distance": 10.0 (double),
-	 *     "detail" : ... (JsonArray) (see bing map routeLeg)
+	 *     "detail" : ... (JsonArray), (see bing map routeLeg)
+	 *     "valid" : true (boolean) (whether the operation is valid)
 	 * }
 	 */
 	public static JSONObject findRoute(String address1, String address2, boolean detail) {
@@ -119,7 +120,9 @@ public class BingMapAPI {
 			System.out.println("Response code: " + responseCode);
 			
 			if (responseCode != 200) {
-				return null;
+				JSONObject error = new JSONObject();
+				error.put("valid", false);
+				return error;
 			}
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -141,6 +144,7 @@ public class BingMapAPI {
 					if(!resource.isNull(0) && !(resource.getJSONObject(0)).isNull("routeLegs") && !(resource.getJSONObject(0)).isNull("travelDistance")) {
 						if(detail) new_obj.put("directions", resource.getJSONObject(0).getJSONArray("routeLegs"));
 						new_obj.put("distance", resource.getJSONObject(0).getDouble("travelDistance"));
+						new_obj.put("valid", true);
 						return new_obj;
 					}
 				}
@@ -149,6 +153,8 @@ public class BingMapAPI {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		JSONObject error = new JSONObject();
+		error.put("valid", false);
+		return error;
 	}
 }
