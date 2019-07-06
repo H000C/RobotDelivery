@@ -1,6 +1,6 @@
 /*
- * Controller (Request Handler):
- *     Handles Get, Post requests from all url
+ * OrderController (Request Handler):
+ *     Handles Get, Post requests from order related tasks
  *     automatic conversion between jsonObject and object
  *     
  * Requests:
@@ -15,6 +15,7 @@ package springboot.controller;
 
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,15 +24,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import springboot.dao.OptionDAO;
 import springboot.dao.RecipientDAO;
 import springboot.dao.SenderDAO;
+import springboot.model.DeliverOption;
 import springboot.model.Recipient;
 import springboot.model.Sender;
 import springboot.service.OptionService;
 import springboot.service.OrderService;
 
 @Controller
-public class setController {
+public class OrderController {
 	
 	@Autowired
 	SenderDAO senderDao;
@@ -71,4 +74,5 @@ public class setController {
 	public String mapWebControl() {
 		return "TrackOrder";
 	}
+	
 }

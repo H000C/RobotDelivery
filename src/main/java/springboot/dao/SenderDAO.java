@@ -28,6 +28,8 @@ public class SenderDAO {
 	public Sender save(Sender sender) {
 		PointOnMap geopoint = BingMapAPI.findLocation(sender.getAddress());
 		sender.setAddress(geopoint.getAddress());
+		sender.setLatitude(geopoint.getLat());
+		sender.setLongitude(geopoint.getLon());
 		return senderRepository.save(sender);
 	} 
 	
