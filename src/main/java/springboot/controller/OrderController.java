@@ -30,6 +30,7 @@ import springboot.dao.SenderDAO;
 import springboot.model.DeliverOption;
 import springboot.model.Recipient;
 import springboot.model.Sender;
+import springboot.service.HistoryService;
 import springboot.service.OptionService;
 import springboot.service.OrderService;
 
@@ -41,6 +42,9 @@ public class OrderController {
 	
 	@Autowired
 	RecipientDAO recipientDao;
+
+	@Autowired
+	HistoryService historyService;
 	
 	/*
 	 * saves an instance of sender into sender table
@@ -50,7 +54,9 @@ public class OrderController {
 	@ResponseBody
 	public Sender setSender(@Valid @RequestBody Sender sender) {
 		if (sender.getOrderid() != null) return senderDao.save(sender);
-		sender.setOrderid(OrderService.generateOrder(sender));
+		String orderId = OrderService.generateOrder(sender);
+		sender.setOrderid(orderId);
+		historyService.setHistory(sender.getUsername(), orderId, 1);
 		return senderDao.save(sender);
 	}
 	
