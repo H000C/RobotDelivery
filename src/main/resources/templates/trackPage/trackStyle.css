@@ -1,0 +1,39 @@
+* {
+    font-family: 'Inconsolata', monospace;
+}
+  
+.top-header {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.logo-text {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    
+}
+
+.trackingFrm, .shippingFrm {
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+footer {
+    border-top: 1px solid #f0eeee;
+    font: bold 14px;
+    line-height: 1;
+    width: 100%;
+    background: #efefef;
+}
+
+#myMap{ 
+   margin: auto;
+   position:relative;
+   width:600px;
+   height:600px;
+   border:2px solid grey;
+}
+
+#pckg-info{
+  font-weight: bold;
+}
+
