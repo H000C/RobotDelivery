@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Track Package</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/fontawesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&amp;display=swap">
+  <link rel="stylesheet" href="styles/main.css">
+  <!--Replace the Bing map key-->
+  <script type='text/javascript'
+          src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap'
+          async defer>
+  </script>
+  <script type='text/javascript'></script>
+</head>
+<body> 
+  <div class="container">
+    <header class="top-header py-3">
+      <h3 class="logo-text text-center">Track Package</h3>
+    </header>
+    <div class="py-1 mb-2">
+            <nav class="nav nav-pills d-flex">
+                <a class="p-3 text-muted" href="#">Home</a>
+                <a class="p-3 text-muted" href="#">About</a>
+                <a class="p-3 text-muted" href="#">Contact</a>
+                <a class="p-3 text-muted ml-auto" href="#">Register/Login</a>
+            </nav>
+        </div>
+  </div>
+  <!--text information-->
+  <div class="container text-center" id="pckg-info">
+    <p>Package <span id="pckg"></span> will arrive by <span id="arvl-date"></span></p>
+    <p>Status: <span id="order">Ordered</span></p>
+  </div>
+  <!--Map-->
+  <div id="myMap">     
+  </div>
+  <br>
+  <br>  
+  <footer class="pt-4 pb-1 text-center">
+        <p>Copyright © LAI-Team-2 2019</p>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="scripts/script.js"></script>
+</body>
+</html>
