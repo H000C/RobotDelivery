@@ -124,7 +124,7 @@ function GetMap()
                     firstWaypointPushpinOptions: {
                         draggable: false,
                         //icon: '',
-                        text: 'Robot'
+                        text: 'UAV'
                     },                 
                     walkingPolylineOptions: {
                         visible: false
