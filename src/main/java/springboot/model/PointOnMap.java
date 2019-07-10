@@ -16,8 +16,8 @@ public class PointOnMap {
 	
 	private boolean isValid;
 	private String address;
-	private double lat;
-	private double lon;
+	private double lat = 0;
+	private double lon = 0;
 	
 	public PointOnMap(boolean isValid, String address, double lat, double lon) {
 		super();
