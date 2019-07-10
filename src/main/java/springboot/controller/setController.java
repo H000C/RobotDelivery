@@ -71,4 +71,24 @@ public class setController {
 	public String mapWebControl() {
 		return "TrackOrder";
 	}
+	@RequestMapping("/")
+	public String indexControl() {
+		return "index";
+	}
+	@RequestMapping("tracking")
+	public String trackControl() {
+		return "tracking";
+	}
+	@RequestMapping("shipSender")
+	public String shipSenderControl() {
+		return "shipSender";
+	}
+	@RequestMapping("shipReceiver")
+	public String shipReceiverControl() {
+		return "shipReceiver";
+	}
+	@RequestMapping("shipMethod")
+	public String shipMethodControl() {
+		return "shipMethod";
+	}
 }
