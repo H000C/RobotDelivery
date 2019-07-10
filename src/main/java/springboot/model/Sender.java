@@ -88,6 +88,7 @@ public class Sender {
 		this.orderid = orderid;
 	}
 
+	public String getUsername() { return firstname + " " + lastname;}
 	public String getFirstname() {
 		return firstname;
 	}
