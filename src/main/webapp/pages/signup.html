@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Item Recommendation">
+    <meta name="author" content="XING">
+    <title>Item Recommendation</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700'
+            rel='stylesheet' type='text/css'>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+<header class="top-header">
+    <nav class="top-nav">
+        <a href="../">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+    </nav>
+</header>
+<div class="container">
+    <header>
+        <p>
+            <span>Item</span> <br/> Recommendation
+        </p>
+    </header>
+    <section class="main-section">
+        <div id="signup-form">
+            <a href="../pages/login.html">
+                <button >Back to login page</button>
+            </a>
+            <br><br><br><br>
+            <label for="username">Username:</label>
+            <input id="username" name="username" type="text">
+            <label for="password">Password:</label>
+            <input id="password" name="password" type="password">
+            <label for="password">Re-enter password:</label>
+            <input id="re-enter-password" name="re-enter-password" type="password">
+            <button id="signup-btn">Sign up</button>
+            <p id="signup-error"></p>
+        </div>
+        <div id="signup-success">
+            <p>Sign up successfully!</p>
+            <a href="../index.html">//need specifiy
+                <button id="home-btn">Return to home page!</button>
+            </a>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p class="title">What We Do</p>
+    <p>"Help you find the best place around."</p>
+    <ul>
+        <li>
+            <p>
+                <i class="fa fa-map-o fa-2x"></i>
+            </p>
+            <p>office, MA</p>
+        </li>
+        <li>
+            <p>
+                <i class="fa fa-envelope-o fa-2x"></i>
+            </p>
+            <p>info@gmail.com</p>
+        </li>
+        <li>
+            <p>
+                <i class="fa fa-phone fa-2x"></i>
+            </p>
+            <p>+1 888 888 8888</p>
+        </li>
+    </ul>
+</footer>
+<script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
+<script src="../scripts/signup.js"></script>
+</body>
+</html>

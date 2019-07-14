@@ -30,6 +30,7 @@ import springboot.dao.SenderDAO;
 import springboot.model.DeliverOption;
 import springboot.model.Recipient;
 import springboot.model.Sender;
+import springboot.service.EmailService;
 import springboot.service.HistoryService;
 import springboot.service.OptionService;
 import springboot.service.OrderService;
@@ -45,6 +46,9 @@ public class OrderController {
 
 	@Autowired
 	HistoryService historyService;
+
+	@Autowired
+	EmailService emailService;
 	
 	/*
 	 * saves an instance of sender into sender table
@@ -57,6 +61,7 @@ public class OrderController {
 		String orderId = OrderService.generateOrder(sender);
 		sender.setOrderid(orderId);
 		historyService.setHistory(sender.getUsername(), orderId, 1);
+		emailService.sendTrackingId(sender.getEmail(), orderId);
 		return senderDao.save(sender);
 	}
 	
