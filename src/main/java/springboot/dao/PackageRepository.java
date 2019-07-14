@@ -1,7 +1,7 @@
 /*
- * SenderRespository interface for Create Read Update Delete
+ * Package Repository interface for Create Read Update Delete
  * 
- * Created by: Haochen Liu
+ * Created by: Shenyi Yu
  */
 
 package springboot.dao;
