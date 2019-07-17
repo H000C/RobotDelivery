@@ -8,8 +8,6 @@ import java.util.Date;
 @Service
 public class PackageOrderService {
 	public String generateOrder(Package pa){
-		String shipDate = pa.getShipDate();
-		String arrivalDate = pa.getArrivalDate();
 		String serviceType = pa.getServiceType();
 		String size = pa.getSize();
 		double weight = pa.getWeight();

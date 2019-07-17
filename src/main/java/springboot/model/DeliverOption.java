@@ -26,8 +26,12 @@ public class DeliverOption {
 	@NotBlank
 	private String pickupLocation;
 	
+	private double[] pickupLatLon; 
+	
 	@NotBlank
 	private String dropoffLoaction;
+	
+	private double[] dropoffLatLon; 
 	
 	@NotNull
 	private int endStation;
@@ -44,14 +48,16 @@ public class DeliverOption {
 	private String arrivingTime;
 
 	public DeliverOption(String trackingid, String deliveryOption, int startStation, String pickupLocation,
-			String dropoffLoaction, int endStation, double initialDistance, double deliveryDistance,
-			double returnDistance, String arrivingTime) {
+			double[] pickupLatLon, String dropoffLoaction, double[] dropoffLatLon, int endStation,
+			double initialDistance, double deliveryDistance, double returnDistance, String arrivingTime) {
 		super();
 		Trackingid = trackingid;
 		DeliveryOption = deliveryOption;
 		this.startStation = startStation;
 		this.pickupLocation = pickupLocation;
+		this.pickupLatLon = pickupLatLon;
 		this.dropoffLoaction = dropoffLoaction;
+		this.dropoffLatLon = dropoffLatLon;
 		this.endStation = endStation;
 		this.initialDistance = initialDistance;
 		this.deliveryDistance = deliveryDistance;
@@ -143,5 +149,20 @@ public class DeliverOption {
 		this.arrivingTime = arrivingTime;
 	}
 
-	
+	public double[] getPickupLatLon() {
+		return pickupLatLon;
+	}
+
+	public void setPickupLatLon(double[] pickupLatLon) {
+		this.pickupLatLon = pickupLatLon;
+	}
+
+	public double[] getDropoffLatLon() {
+		return dropoffLatLon;
+	}
+
+	public void setDropoffupLatLon(double[] dropoffLatLon) {
+		this.dropoffLatLon = dropoffLatLon;
+	}
+
 }
