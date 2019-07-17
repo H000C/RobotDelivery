@@ -18,6 +18,7 @@ import javax.validation.Valid;
 
 @Controller
 public class PackageController {
+	
     @Autowired
     PackageDAO packageDAO;
 
@@ -30,9 +31,9 @@ public class PackageController {
     @PostMapping("/setOrder/setPackage")
     @ResponseBody
     public Package setPackage(@Valid @RequestBody Package pa){
-        if (pa.getorderId() != null) return packageDAO.save(pa);
+        if (pa.getOrderid() != null) return packageDAO.save(pa);
         PackageOrderService order = new PackageOrderService();
-        pa.setorderId(order.generateOrder(pa));
+        pa.setOrderid(order.generateOrder(pa));
         return packageDAO.save(pa);
     }
 

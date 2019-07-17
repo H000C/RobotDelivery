@@ -6,17 +6,19 @@ import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
+import springboot.ProjectConstants;
+import springboot.dao.OptionDAO;
 import springboot.dao.SummaryDAO;
 import springboot.model.DeliverOption;
 import springboot.model.DeliverSummary;
 
 @Service
 public class DeliveryService {
-	private static final double ROBOT_SPEED = 15;
-	private static final double UAV_SPEED = 40;
+	private static final double ROBOT_SPEED = ProjectConstants.ROBOT_SPEED;
+	private static final double UAV_SPEED = ProjectConstants.UAV_SPEED;
 	
-	// set a deliver option by returning an option with arriving time
-	public static DeliverOption setDelivery(DeliverOption option) {
+	// set a deliver option by saving an option with arriving time
+	public static DeliverOption setDelivery(DeliverOption option, OptionDAO optiondao) {
 		
 		double deliverTime = 0;
 		double delivery_distance = option.getInitialDistance() + option.getDeliveryDistance();
@@ -30,7 +32,7 @@ public class DeliveryService {
 	    SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    // setting arriving time
 	    option.setArrivingTime(sdfDate.format(date));
-		return option;
+		return optiondao.save(option);
 	}
 	
 	// preparing the option's deliver summary, this will make tracking easier
