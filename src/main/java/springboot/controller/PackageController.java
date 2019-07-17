@@ -1,3 +1,9 @@
+/**
+ * more of a dummy check before connect with front end
+ * Creator: Shenyi Yu
+ */
+
+
 package springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;

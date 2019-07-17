@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import springboot.model.User;
+import springboot.service.EmailService;
 import springboot.service.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -20,8 +21,13 @@ public class Authorization {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private EmailService emailService;
+
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody User user) {
+        System.out.println("here is in singup url");
+        System.out.println(user.getUsername() + user.getPassword());
         if(userService.findUser(user.getUsername())!=null)
         {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Username already existed!\n");
@@ -54,6 +60,7 @@ public class Authorization {
     public ResponseEntity<String> test()
 
     {
+//        emailService.sendTrackingId("xlifocus@gmail.com", "0000000011111");
         return ResponseEntity.status(HttpStatus.OK).body("Hello World\n");
 
     }
