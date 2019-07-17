@@ -22,7 +22,7 @@ public class OrderService {
 	public static String generateOrder(Sender sender){
 		Date date = new Date();
 		long time = date.getTime();
-		String initial = sender.getLastname();
+		char initial = sender.getLastname().charAt(0);
 		String orderid = initial + Long.toString(time);
 		return orderid;
 	}
@@ -30,7 +30,7 @@ public class OrderService {
 	public static String generateOrder(Recipient recipient){
 		Date date = new Date();
 		long time = date.getTime();
-		String initial = recipient.getLastname();
+		char initial = recipient.getLastname().charAt(0);
 		String orderid = initial + Long.toString(time);
 		return orderid;
 	}

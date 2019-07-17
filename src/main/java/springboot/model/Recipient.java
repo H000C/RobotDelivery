@@ -37,6 +37,10 @@ public class Recipient {
 	@NotBlank
 	private String address;
 	
+	private double latitude;
+	
+	private double longitude;
+	
 	@NotBlank
 	private String zipcode; 
 	
@@ -53,21 +57,24 @@ public class Recipient {
 	@LastModifiedDate
 	protected Date createdAt;
 	
-	public Recipient(String orderid, String firstname, String lastname, String address, String zipcode, String email,
-			String phone, String createdBy, Date createdAt) {
+	public Recipient(String orderid, String firstname, String lastname, String address, double latitude,
+			double longitude, String zipcode, String email, String phone, String createdBy, Date createdAt) {
 		super();
 		this.orderid = orderid;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.address = address;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.zipcode = zipcode;
 		this.email = email;
 		this.phone = phone;
 		this.createdBy = createdBy;
 		this.createdAt = createdAt;
 	}
-	
+
 	public Recipient() {
+		super();
 		
 	}
 	
@@ -97,6 +104,23 @@ public class Recipient {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
 	public String getZipcode() {
 		return zipcode;
 	}
