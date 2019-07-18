@@ -39,29 +39,6 @@ public class setController {
 	@Autowired
 	RecipientDAO recipientDao;
 
-	/*
-	 * saves an instance of sender into sender table
-	 * returns the saved instance 
-	 */
-	@PostMapping("/setOrder/setSender")
-	@ResponseBody
-	public Sender setSender(@Valid @RequestBody Sender sender) {
-		if (sender.getOrderid() != null) return senderDao.save(sender);
-		sender.setOrderid(OrderService.generateOrder(sender));
-		return senderDao.save(sender);
-	}
-
-	/*
-	 * saves an instance of recipient into recipient table
-	 * returns the saved instance 
-	 */
-	@PostMapping("/setOrder/setRecipient")
-	@ResponseBody
-	public Recipient setRecipient(@Valid @RequestBody Recipient recipient) {
-		if (recipient.getOrderid() != null) return recipientDao.save(recipient);
-		recipient.setOrderid(OrderService.generateOrder(recipient));
-		return recipientDao.save(recipient);
-	}
 
 	/*
 	 * returns a HTML page under templates
