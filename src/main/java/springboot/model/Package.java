@@ -25,27 +25,19 @@ public class Package {
     //weight cost double ?
 
     @Id
-    private String orderId;
-
+    private String orderid;
 
     private String serviceType;
+    
     private String trackingId;
-
 
 
     @NotBlank
     private String size;
 
-
-    private String shipDate;
-
-
-    private String arrivalDate;
-
     @NotNull
     private double weight;
 
-    @NotNull
     private double cost;
 
     // this identifies the User
@@ -55,104 +47,104 @@ public class Package {
     @LastModifiedDate
     protected Date createdAt;
 
-    public Package(String orderId, String serviceType, String size, String shipDate, String arrivalDate, double weight,
-                   double cost, String createdBy, Date createdAt) {
-        super();
-        this.orderId = orderId;
-        this.serviceType = serviceType;
-        this.size = size;
-        this.shipDate = shipDate;
-        this.arrivalDate = arrivalDate;
-        this.weight = weight;
-        this.cost = cost;
-        this.createdBy = createdBy;
-        this.createdAt = createdAt;
-        this.trackingId = trackingId;
-    }
 
-    public Package() {
-
-    }
+	public Package(String orderid, String serviceType, String trackingId, String size, double weight, double cost,
+			String createdBy, Date createdAt) {
+		super();
+		this.orderid = orderid;
+		this.serviceType = serviceType;
+		this.trackingId = trackingId;
+		this.size = size;
+		this.weight = weight;
+		this.cost = cost;
+		this.createdBy = createdBy;
+		this.createdAt = createdAt;
+	}
 
 
-    public String getorderId() {
-        return orderId;
+	public Package() {
+
     }
 
-    public void setorderId(String orderId) {
-        this.orderId = orderId;
-    }
 
-    public String getServiceType() {
-        return serviceType;
-    }
+	public String getOrderid() {
+		return orderid;
+	}
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
-    }
-    public String getTrackingId() {
-        return trackingId;
-    }
 
-    public void setTrackingId(String trackingId) {
-        this.trackingId = trackingId;
-    }
+	public void setOrderid(String orderid) {
+		this.orderid = orderid;
+	}
 
-    public String getSize() {
-        return size;
-    }
 
-    public void setSize(String size) {
-        this.size = size;
-    }
+	public String getServiceType() {
+		return serviceType;
+	}
 
-    public String getShipDate() {
-        return shipDate;
-    }
 
-    public void setShipDate(String shipDate) {
-        this.shipDate = shipDate;
-    }
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
+	}
 
-    public String getArrivalDate() {
-        return arrivalDate;
-    }
 
-    public void setArrivalDate(String arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
+	public String getTrackingId() {
+		return trackingId;
+	}
 
-    public double getWeight() {
-        return weight;
-    }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
+	public void setTrackingId(String trackingId) {
+		this.trackingId = trackingId;
+	}
 
-    public double getCost() {
-        return cost;
-    }
 
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
+	public String getSize() {
+		return size;
+	}
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
+	public void setSize(String size) {
+		this.size = size;
+	}
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+	public double getWeight() {
+		return weight;
+	}
+
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+
+	public double getCost() {
+		return cost;
+	}
+
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
 }
 

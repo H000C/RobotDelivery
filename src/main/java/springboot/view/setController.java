@@ -13,29 +13,18 @@
  */
 package springboot.view;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import springboot.dao.RecipientDAO;
-import springboot.dao.SenderDAO;
-
 @Controller
 public class setController {
-
-	@Autowired
-	SenderDAO senderDao;
-
-	@Autowired
-	RecipientDAO recipientDao;
-
 	/*
 	 * returns a HTML page under templates
 	 */
 	@RequestMapping("/")
 	public String indexControl() {
-		return "index";
+		return "newIndex";
 	}
 	@RequestMapping("/shipSender")
 	public String shipSenderControl() {
