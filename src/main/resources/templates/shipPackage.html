@@ -31,22 +31,24 @@
 	</div>
 
 	<div class="container">
-		<form id="shipPageMethod" class="border border-primary rounded shippingFrm"
+		<form id="shipPagePackage" class="border border-primary rounded shippingFrm needs-validation"
 			novalidate="novalidate">
-		  <h3 class="text-center text-primary font-weight-bold mb-4">Choose a Delivery Method</h3>
-		  <div class="custom-control custom-radio custom-control-inline">
-		      <input type="radio" id="radioBot" name="optionRadio" class="custom-control-input" checked="checked" />
-		      <label class="custom-control-label" for="radioBot">Bot</label>
+		  <h3 class="text-center text-primary font-weight-bold mb-4">Package Info</h3>
+		  <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label>Package Size (inch.)</label>
+		      <input type="text" class="form-control" id="packageSize" placeholder="Package Size" required="required" />
+		      <div class="invalid-feedback">Valid size required</div>
+		    </div>
+		    <div class="form-group col-md-6">
+		      <label>Package Weight (lb.)</label>
+		      <input type="text" class="form-control" id="packageWeight" placeholder="Package Weight" required="required" />
+		      <div class="invalid-feedback">Valid weight required</div>		      
+		    </div>
 		  </div>
-		  <div class="custom-control custom-radio custom-control-inline">
-		    <input type="radio" id="radioDrone" name="optionRadio" class="custom-control-input" />
-		    <label class="custom-control-label" for="radioDrone">Drone</label>
-		  </div>
-		  <br/><br/>
 		  
-		  <a id="pageToReceiver" class="btn btn-primary" th:href="@{shipPackage}">&#8249; Previous</a>
-		  <button class="btn btn-primary" type="submit">Submit</button>
-		  
+		  <a id="pageToMethod" class="btn btn-primary" th:href="@{shipReceiver}">&#8249; Previous</a>
+		  <button class="btn btn-primary" type="submit">Next &#8250;</button>
 		</form>
 	</div>
 
@@ -58,6 +60,6 @@
 	</footer>
 	
 	<script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/pages/shipMethod.js}"></script>
+    <script th:src="@{/js/pages/shipPackage.js}"></script>	
 </body>
 </html>
