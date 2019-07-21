@@ -18,6 +18,11 @@
     margin: 2rem 0;
 }
 
+#shipPageMethod button {
+	background-color: darkblue;
+	border-color: darkblue;
+}
+
 footer {
     border-top: 1px solid #f0eeee;
     font: bold 14px;
