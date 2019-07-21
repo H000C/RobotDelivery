@@ -11,7 +11,7 @@
  * Created by: Haochen Liu
  * Modified by: Haochen Liu
  */
-package springboot.controller;
+package springboot.view;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
