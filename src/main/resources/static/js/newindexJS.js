@@ -1,13 +1,13 @@
 /**
  * javascript for newindex.html
  */
-document.getElementById('trackingWindow').addEventListener('submit', function (e) {  
+document.getElementById('submit').addEventListener('click', function (e) {  
        e.preventDefault();  
        var methodInfo = JSON.stringify({  
         trackingid: document.getElementById('trackingNumber').value  
        });  
          
-       fetch('/setOrder/setPackage', {  
+       fetch('/trackOrder/currentLocation', {  
         method: 'POST',  
         headers: {   
          'Content-Type': 'application/json'  
@@ -16,8 +16,10 @@ document.getElementById('trackingWindow').addEventListener('submit', function (e
        }).then(function (resp) {  
         return resp.json();  
        }).then(function (myJSON) {  
-    	   JSON.stringify(myJSON);
+    	   console.log(JSON.stringify(myJSON));
+    	   
        })  
          
-       self.location = "tracking";  
+       
+       //self.location = "trackPackage";  
 });
