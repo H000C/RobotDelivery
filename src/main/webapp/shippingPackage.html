@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE>
     <html xmlns="http://www.w3.org/1999/xhtml" 
     xmlns:th="http://www.thymeleaf.org" 
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
@@ -31,26 +31,37 @@
 	</div>
 
 	<div class="container">
-		<form id="shipPageMethod" class="border border-primary rounded shippingFrm"
-			novalidate="novalidate">
-		  <h3 class="text-center text-primary font-weight-bold mb-4">Choose a Delivery Method</h3>
-		  <div class="custom-control custom-radio custom-control-inline">
-		      <input type="radio" id="radioBot" name="optionRadio" class="custom-control-input" checked="checked" />
-		      <label class="custom-control-label" for="radioBot">Bot</label>
-		  </div>
-		  <div class="custom-control custom-radio custom-control-inline">
-		    <input type="radio" id="radioDrone" name="optionRadio" class="custom-control-input" />
-		    <label class="custom-control-label" for="radioDrone">Drone</label>
-		  </div>
-		  <br/><br/>
-		  
-		  <a id="pageToReceiver" class="btn btn-primary" th:href="@{shipPackage}">&#8249; Previous</a>
-		  <button class="btn btn-primary" type="submit">Submit</button>
-		  
+    	<!-- Shipping page #3 -->
+		  <div class="form-row">
+		    <div class="form-group col-md-8">
+		      <label for="inputPackageWeight">Weight</label>
+		      <input type="text" class="form-control" id="inputPackageWeight" placeholder="package weight"/>
+		    </div>
+            <div class="form-group col-md-4">
+		      <label for="PackageWeightUnit">Unit</label>
+		      <select id="PackageWeightUnit" class="form-control">
+		        <option selected="selected">lbs or kg</option>
+		        <option value="PackageWeightlbs">lbs</option>
+		        <option value="PackageWeightkg">kg</option>
+		      </select>
+		    </div>
+          </div>
+          <div class="form-row">
+		    <div class="form-group col-md-12">
+              <label for="inputPackageDimension">Dimension</label>
+		      <select id="inputPackageDimension" class="form-control">
+		        <option selected="selected">Choose...</option>
+		        <option value="PackageDimensionSmall" >20" x 12" x 6" (small)</option>
+		        <option value="PackageDimensionMedium1"> 24" x 20" x 6" (medium)</option>
+                <option value="PackageDimensionMedium2"> 20" x 12" x 12" (medium)</option>
+                <option value="PackageDimensionLarge"> 24" x 20" x 12" (large)</option>
+		      </select>
+		    </div>
+		  		  
+		  <a id="pageToReceiver" class="btn btn-primary" th:href="@{shipReceiver}">Next</a>
 		</form>
-		<div id="paypal-button-container" align="center"></div>
+	
 	</div>
-	  <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
 
   	<footer class="pt-4 pb-1 text-center">
 	    <p><strong>"We deliver your packages right."</strong></p>
@@ -60,6 +71,6 @@
 	</footer>
 	
 	<script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/pages/shipMethod.js}"></script>
+	
 </body>
 </html>
