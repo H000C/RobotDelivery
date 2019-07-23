@@ -11,6 +11,7 @@
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&amp;display=swap" />
 	<link rel="stylesheet" href="styles/main.css" />
+	
 </head>
 
 <body>
@@ -31,63 +32,67 @@
 	</div>
 
 	<div class="container">
-    	<!-- Shipping page #1 -->
-		<form id="shipPage1" class="border border-primary rounded shippingFrm">
+		<form id="shipPageSender" class="border border-primary rounded shippingFrm needs-validation"
+			novalidate="novalidate">
 		  <h3 class="text-center text-primary font-weight-bold mb-4">Sender Information</h3>
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
-		      <label for="inputSenderFn">First Name</label>
-		      <input type="text" class="form-control" id="inputSenderFn" placeholder="First Name" />
+		      <label>First Name</label>
+		      <input type="text" class="form-control" id="senderFn" placeholder="First Name" required="required" />
+		      <div class="invalid-feedback">Valid first name required</div>
 		    </div>
 		    <div class="form-group col-md-6">
-		      <label for="inputSenderLn">Last Name</label>
-		      <input type="text" class="form-control" id="inputSenderLn" placeholder="Last Name" />
+		      <label>Last Name</label>
+		      <input type="text" class="form-control" id="senderLn" placeholder="Last Name" required="required" />
+		      <div class="invalid-feedback">Valid last name required</div>
 		    </div>
 		  </div>
+		  
 		  <div class="form-row">
-			  <div class="form-group col-md-6">
-			    <label for="inputSenderAddress">Address</label>
-			    <input type="text" class="form-control" id="inputSenderAddress" placeholder="1234 Main St" />
+			  <div class="form-group col-md-8">
+			    <label>Address</label>
+			    <input type="text" class="form-control" id="senderAddress" placeholder="1234 Main St" required="required" />	
+			    <div class="invalid-feedback">Valid address required</div>
 			  </div>
-			  <div class="form-group col-md-6">
-			    <label for="inputSenderAddress2">Address 2</label>
-			    <input type="text" class="form-control" id="inputSenderAddress2" placeholder="Apartment, studio, or floor" />
+			  <div class="form-group col-md-4">
+			    <label>Address 2 (optional)</label>
+			    <input type="text" class="form-control" id="senderAddress2" placeholder="Apartment, studio, or floor" />
 			  </div>	  
 		  </div>
 		  
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
-		      <label for="inputSenderCity">City</label>
-		      <input type="text" class="form-control" id="inputSenderCity" />
-		    </div>
-		    <div class="form-group col-md-4">
-		      <label for="inputSenderState">State</label>
-		      <select id="inputSenderState" class="form-control">
-		        <option selected="selected">Choose...</option>
-		        <option value="CA">CA</option>
-		        <option value="WA">WA</option>
-		      </select>
+		      <label>City</label>
+		      <input type="text" class="form-control" id="senderCity" value="San Francisco" readonly="readonly" />
 		    </div>
 		    <div class="form-group col-md-2">
-		      <label for="inputSenderZip">Zip</label>
-		      <input type="text" class="form-control" id="inputSenderZip" />
+		      <label>State</label>
+		      <input type="text" class="form-control" id="senderState" value="CA" readonly="readonly" />
+		    </div>
+		    <div class="form-group col-md-4">
+		      <label>Zip</label>
+		      <input type="text" class="form-control" id="senderZip" required="required" pattern="^\d{5}$" />
+		      <div class="invalid-feedback">Valid zip code required</div>		      
 		    </div>
 		  </div>
 		  
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
-		      <label for="inputSenderPhone">Phone Number</label>
-		      <input type="text" class="form-control" id="inputSenderPhone" placeholder="Phone Number" />
+		      <label>Phone Number</label>
+		      <input type="text" class="form-control" id="senderPhone" placeholder="Phone Number" required="required" pattern="^\d{10}$" />
+		      <div class="invalid-feedback">Valid phone number required</div>		      
 		    </div>
 		    <div class="form-group col-md-6">
-		      <label for="inputSenderEmail">Email</label>
-		      <input type="text" class="form-control" id="inputSenderEmail" placeholder="Email" />
+		      <label>Email</label>
+		      <input type="text" class="form-control" id="senderEmail" placeholder="Email" required="required"
+		      	pattern="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" />
+	      	  <div class="invalid-feedback">Valid email address required</div>
 		    </div>
 		  </div>
-		  		  
-		  <a id="pageToReceiver" class="btn btn-primary" th:href="@{shipReceiver}">Next</a>
+		  
+		  <a class="btn btn-primary" th:href="@{/}">&#8249; Back to Home</a>
+		  <button class="btn btn-primary" type="submit">Next &#8250;</button>
 		</form>
-	
 	</div>
 
   	<footer class="pt-4 pb-1 text-center">
@@ -98,6 +103,7 @@
 	</footer>
 	
 	<script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/pages/shipSender.js}"></script>
 	
 </body>
 </html>
