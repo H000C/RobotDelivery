@@ -17,8 +17,7 @@ public class CDHelper {
 	@Autowired
 	OptionDAO optionDao;
 	
-	public latlonGroup getPhaseRoute(String Phase, String trackingid) {
-		DeliverOption option = optionDao.findOne(trackingid);
+	public latlonGroup getPhaseRoute(String Phase, DeliverOption option) {
 		latlonGroup llg = new latlonGroup();
 		if (Phase.equals("leaving")) {
 			llg.setStart(getStationCoord(option.getStartStation()));
@@ -32,13 +31,20 @@ public class CDHelper {
 			llg.setFinish(option.getDropoffLatLon());
 			llg.setFinishAddr(option.getDropoffLoaction());
 		}
-		else {
+		else if (Phase.equals("pickup")){
 			llg.setStart(option.getDropoffLatLon());
 			llg.setStartAddr(option.getDropoffLoaction());
 			llg.setFinish(getStationCoord(option.getEndStation()));
 			llg.setFinishAddr(getStationAddr(option.getEndStation()));
 		}
-		return null;
+		else {
+			llg.setStart(option.getDropoffLatLon());
+			llg.setStartAddr(option.getDropoffLoaction());
+			llg.setCurrent(getStationCoord(option.getEndStation()));
+			llg.setFinish(getStationCoord(option.getEndStation()));
+			llg.setFinishAddr(getStationAddr(option.getEndStation()));
+		}
+		return llg;
 	}
 	
 	private static double[] getStationCoord(int id) {
@@ -94,6 +100,7 @@ public class CDHelper {
 			}
 		}
 		JSONArray coordinate = point.getJSONArray("coordinates");
+		System.out.println(point.toString());
 		double[] latlon = {coordinate.getDouble(0), coordinate.getDouble(1)};
 		track.setCurrent(latlon);
 		return track;
