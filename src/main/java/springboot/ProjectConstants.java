@@ -11,5 +11,5 @@ public class ProjectConstants {
 	public static final String station3 = "652 Polk St, San Francisco, CA";
 	public static final double[] station3_latlon = {37.782928, -122.418996};
 	
-	public static final String BingMapKey = "";
+	public static final String BingMapKey = "AsKJNB5C4C7bRoCI1Bk0X3NoyT8XgVNromkb94dVJD8IxynWcztwmskuQmZ1imqx";
 }
