@@ -17,10 +17,12 @@ import javax.validation.Valid;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import springboot.ProjectConstants;
 import springboot.dao.OptionDAO;
 import springboot.dao.PackageDAO;
 import springboot.dao.RecipientDAO;
@@ -28,6 +30,8 @@ import springboot.dao.SenderDAO;
 import springboot.dao.SummaryDAO;
 import springboot.model.DeliverOption;
 import springboot.model.Package;
+import springboot.model.latlonGroup;
+import springboot.service.CDHelper;
 import springboot.service.DeliveryService;
 import springboot.service.OptionService;
 //import springboot.service.OptionService;
@@ -105,5 +109,17 @@ public class OptionController {
 		DeliveryService.setDeliverSummery(opt, summaryDao);
 		// set the delivery
 		return DeliveryService.setDelivery(opt, optionDao);
+	}
+	
+	@PostMapping ("/test")
+	@ResponseBody
+	public latlonGroup testing() {
+		latlonGroup test = new latlonGroup();
+		test.setStart(ProjectConstants.station1_latlon);
+		test.setStartAddr(ProjectConstants.station1);
+		test.setFinish(ProjectConstants.station3_latlon);
+		test.setFinishAddr(ProjectConstants.station3);
+		return CDHelper.getRobotTracking(test, 2);
+		
 	}
 }

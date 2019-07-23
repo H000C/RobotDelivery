@@ -89,7 +89,7 @@ public class BingMapAPI {
 	/* takes 2 address and a enabling boolean, return information of a route as a JsonObject
 	 * {
 	 *     "distance": 10.0 (double),
-	 *     "detail" : ... (JsonArray), (see bing map routeLeg)
+	 *     "directions" : ... (JsonArray), (see bing map routeLeg)
 	 *     "valid" : true (boolean) (whether the operation is valid)
 	 * }
 	 */
