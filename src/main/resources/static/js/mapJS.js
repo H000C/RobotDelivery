@@ -1,13 +1,21 @@
 //define variables from backend
 //var trackingStartAddresss = 'Space Needle';
 //var trackingEndAddress = 'Pike Market, Washington';
-var trackingStartLocation = { lat: 37.777481, lon: -122.432467 };
-var trackingEndLocation = { lat: 37.783059, lon: -122.446494 };
-var trackingCurLocation = { lat: 37.779640, lon: -122.438740 };
-var vehicleType = 'robot';// Robot or UAV
-var trackingNum = "SF100888";
+//var trackingStartLocation = { lat: 37.777481, lon: -122.432467 };
+//var trackingEndLocation = { lat: 37.783059, lon: -122.446494 };
+//var trackingCurLocation = { lat: 37.779640, lon: -122.438740 };
+//var vehicleType = 'UAV';// Robot or UAV
+//var trackingNum = "SF100888";
 var arvlDate = "Friday";
 var orderStatus = "Shipped";
+
+var trackingStartLocation = sessionStorage.getItem('startLoc');
+var trackingEndLocation = sessionStorage.getItem('endLoc');
+var trackingCurLocation = sessionStorage.getItem('curLoc');
+var trackingNum = sessionStorage.getItem('trackingID');
+var vehicleType = trackID.substr(-1);
+
+
 
 //draw the map
 function GetMap()
@@ -23,7 +31,7 @@ function GetMap()
         });
            
         //decide the type of vehicle. polylines for robots/straight lines for UAVs
-        if (vehicleType == 'robot'){      
+        if (vehicleType == 'R'){      
             Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function showTrack() {
                 var directionsManager1 = new Microsoft.Maps.Directions.DirectionsManager(map);
                 directionsManager1.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.walking });
@@ -50,18 +58,25 @@ function GetMap()
                     firstWaypointPushpinOptions: {
                         draggable: false,
                         color: 'green',
-                        text: 'S'
+                        text: "S",
+                        icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                        title: ''
                     },                 
                     walkingPolylineOptions: {
                         strokeColor: 'green',
                         strokeThickness: 6
-                    }
+                    },
+                  lastWaypointPushpinOptions: {
+                        draggable: false,
+                        visible: false
+                  }
+                  
                 });
                 directionsManager2.setRenderOptions({ 
                     firstWaypointPushpinOptions: {
                         draggable: false,
-                        //icon: '',
-                        text: 'Robot'
+                        title: 'Robot',
+                        icon: 'https://img.icons8.com/ultraviolet/40/000000/bot.png'
                     },                 
                     walkingPolylineOptions: {
                         strokeColor: 'orange',
@@ -70,14 +85,16 @@ function GetMap()
                   lastWaypointPushpinOptions: {
                         draggable: false,
                         color: 'orange',
-                        text: 'E'
+                        text: 'E',
+                        icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                        title: ''
                   }
                 });
                 directionsManager1.calculateDirections();
                 directionsManager2.calculateDirections();
             });
         }//if it is robot
-        else if(vehicleType == 'UAV'){
+        else if(vehicleType == 'U'){
            Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function showTrack() {
                 var directionsManager1 = new Microsoft.Maps.Directions.DirectionsManager(map);
                 directionsManager1.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.walking });
@@ -114,25 +131,34 @@ function GetMap()
                     firstWaypointPushpinOptions: {
                         draggable: false,
                         color: 'green',
-                        text: 'S'
-                    },                 
-                    walkingPolylineOptions: {
-                        visible: false
-                    }
-                });
-                directionsManager2.setRenderOptions({ 
-                    firstWaypointPushpinOptions: {
-                        draggable: false,
-                        //icon: '',
-                        text: 'UAV'
+                        text: "S",
+                        icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                        title: ''
                     },                 
                     walkingPolylineOptions: {
                         visible: false
                     },
                   lastWaypointPushpinOptions: {
                         draggable: false,
+                        visible: false
+                  }
+                  
+                });
+                directionsManager2.setRenderOptions({ 
+                    firstWaypointPushpinOptions: {
+                        draggable: false,
+                        title: 'Drone',
+                        icon: 'https://img.icons8.com/ultraviolet/40/000000/drone.png'
+                    },                 
+                    walkingPolylineOptions: {
+                        visible:false
+                    },
+                  lastWaypointPushpinOptions: {
+                        draggable: false,
                         color: 'orange',
-                        text: 'E'
+                        text: 'E',
+                        icon: 'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                        title: ''
                   }
                 });
                 directionsManager1.calculateDirections();
@@ -147,5 +173,7 @@ function GetMap()
 document.getElementById("pckg").innerHTML = trackingNum;
 document.getElementById("arvl-date").innerHTML = arvlDate;
 document.getElementById("order").innerHTML = orderStatus;
+
+
 
 

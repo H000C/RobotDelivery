@@ -76,14 +76,7 @@ public class OrderController {
 		recipient.setOrderid(OrderService.generateOrder(recipient));
 		return recipientDao.save(recipient);
 	}
-	
-	/*
-	 * returns a HTML page under templates
-	 * which name is TrackOrder
-	 */
-	@RequestMapping("/trackOrder")
-	public String mapWebControl() {
-		return "TrackOrder";
-	}
-	
 }
+	
+
+
