@@ -3,6 +3,7 @@ package springboot.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import springboot.ProjectConstants;
 import springboot.dao.RecipientDAO;
 import springboot.dao.SenderDAO;
 import springboot.model.DeliverOption;
@@ -12,14 +13,14 @@ import springboot.model.StationNDistance;
 
 @Service
 public class OptionService {
-
-	static String station1 = "1390 Silver Ave, San Francisco, CA";
-	static double[] station1_latlon = {37.73107, -122.40907};
-	static String station2 = "1222 Noriega St, San Francisco, CA";
-	static double[] station2_latlon = {37.754452, -122.477165};
-	static String station3 = "652 Polk St, San Francisco, CA";
-	static double[] station3_latlon = {37.782928, -122.418996};
-
+	
+	static String station1 = ProjectConstants.station1;
+	static double[] station1_latlon = ProjectConstants.station1_latlon;
+	static String station2 = ProjectConstants.station2;
+	static double[] station2_latlon = ProjectConstants.station2_latlon;
+	static String station3 = ProjectConstants.station3;
+	static double[] station3_latlon = ProjectConstants.station3_latlon;
+	
 	public static DeliverOption[] getOptions (String order, SenderDAO senderDao, RecipientDAO recipientDao) {
 
 		Sender sender = senderDao.findOne(order);
@@ -42,6 +43,10 @@ public class OptionService {
 		uav.setEndStation(end.stationNum);
 		uav.setPickupLocation(sender.getAddress());
 		uav.setDropoffLoaction(recipient.getAddress());
+		double[] pickupLatLon = {sender.getLatitude(),sender.getLongitude()};
+		uav.setPickupLatLon(pickupLatLon);
+		double[] dropoffLatLon = {recipient.getLatitude(), recipient.getLongitude()};
+		uav.setDropoffupLatLon(dropoffLatLon);
 		uav.setInitialDistance(begin.distance);;
 		uav.setDeliveryDistance(
 				GetLocation.UAVOption(
@@ -55,9 +60,16 @@ public class OptionService {
 		robot.setEndStation(end.stationNum);
 		robot.setPickupLocation(sender.getAddress());
 		robot.setDropoffLoaction(recipient.getAddress());
+
+		double[] pickupLatLon2 = {sender.getLatitude(),sender.getLongitude()};
+		robot.setPickupLatLon(pickupLatLon2);
+		double[] dropoffLatLon2 = {recipient.getLatitude(), recipient.getLongitude()};
+		robot.setDropoffupLatLon(dropoffLatLon2);
+
 		robot.setInitialDistance(GetLocation.RobotOption(begin.stationAddr, sender.getAddress()));
 		robot.setDeliveryDistance(GetLocation.RobotOption(sender.getAddress(), recipient.getAddress()));
 		robot.setReturnDistance(GetLocation.RobotOption(recipient.getAddress(), end.stationAddr));
+
 		DeliverOption[] twoOptions = {robot, uav};
 		return twoOptions;
 	}

@@ -31,26 +31,17 @@
 	</div>
 
 	<div class="container">
-		<form id="shipPageMethod" class="border border-primary rounded shippingFrm"
-			novalidate="novalidate">
-		  <h3 class="text-center text-primary font-weight-bold mb-4">Choose a Delivery Method</h3>
-		  <div class="custom-control custom-radio custom-control-inline">
-		      <input type="radio" id="radioBot" name="optionRadio" class="custom-control-input" checked="checked" />
-		      <label class="custom-control-label" for="radioBot">Bot</label>
-		  </div>
-		  <div class="custom-control custom-radio custom-control-inline">
-		    <input type="radio" id="radioDrone" name="optionRadio" class="custom-control-input" />
-		    <label class="custom-control-label" for="radioDrone">Drone</label>
+		<form id="shipPageSuccess" class="border border-primary rounded shippingFrm">
+		  <h3 class="text-center text-primary font-weight-bold mb-4">Congratulations, your delivery is completed!</h3>
+		  <!-- 
+		  <div class="">
+		      <label class="" for="deliveryInfo">info is here</label>
 		  </div>
 		  <br/><br/>
-		  
-		  <a id="pageToReceiver" class="btn btn-primary" th:href="@{shipPackage}">&#8249; Previous</a>
-		  <button class="btn btn-primary" type="submit">Submit</button>
-		  
+		   -->
+		  <a id="pageToHome" class="btn btn-primary" th:href="@{shipPackage}">Back to Home Page</a>		  
 		</form>
-		<div id="paypal-button-container" align="center"></div>
 	</div>
-	  <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
 
   	<footer class="pt-4 pb-1 text-center">
 	    <p><strong>"We deliver your packages right."</strong></p>
@@ -59,7 +50,6 @@
     	<p>Copyright © LAI-Team-2 2019</p>
 	</footer>
 	
-	<script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/pages/shipMethod.js}"></script>
+	<script th:src="@{/js/main.js}"></script>	
 </body>
 </html>

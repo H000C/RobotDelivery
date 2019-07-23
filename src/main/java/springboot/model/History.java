@@ -3,6 +3,7 @@ package springboot.model;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="history")
@@ -23,7 +24,7 @@ public class History {
      * 1: activate
      * 2: finished
      */
-    @NotBlank
+    @NotNull
     private int status;
 
     public History() {

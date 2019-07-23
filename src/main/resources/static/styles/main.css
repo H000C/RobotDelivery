@@ -1,5 +1,6 @@
 * {
     font-family: 'Inconsolata', monospace;
+    scroll-behavior:  smooth ;
 }
   
 .top-header {
@@ -16,6 +17,11 @@
 .trackingFrm, .shippingFrm {
     padding: 2rem;
     margin: 2rem 0;
+}
+
+#shipPageMethod button {
+	background-color: darkblue;
+	border-color: darkblue;
 }
 
 footer {
