@@ -9,6 +9,7 @@ var trackingEndLocation = {lat:obj1.finish[0], lon: obj1.finish[1]};
 var trackingCurLocation = {lat:obj1.current[0], lon: obj1.current[1]};
 var trackingNum = myID;
 var vehicleType = trackingNum.substr(-1);
+var shipStatus = obj1.phase;
 
 //draw the map
 function GetMap()
@@ -164,8 +165,8 @@ function GetMap()
     }
 
 document.getElementById("pckg").innerHTML = trackingNum;
-document.getElementById("arvl-date").innerHTML = arvlDate;
-document.getElementById("order").innerHTML = orderStatus;
+//document.getElementById("arvl-date").innerHTML = arvlDate;
+document.getElementById("order").innerHTML = shipStatus;
 
 
 
