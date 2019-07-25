@@ -1,21 +1,14 @@
-//define variables from backend
-//var trackingStartAddresss = 'Space Needle';
-//var trackingEndAddress = 'Pike Market, Washington';
-//var trackingStartLocation = { lat: 37.777481, lon: -122.432467 };
-//var trackingEndLocation = { lat: 37.783059, lon: -122.446494 };
-//var trackingCurLocation = { lat: 37.779640, lon: -122.438740 };
-//var vehicleType = 'UAV';// Robot or UAV
-//var trackingNum = "SF100888";
 var arvlDate = "Friday";
 var orderStatus = "Shipped";
 
-var trackingStartLocation = sessionStorage.getItem('startLoc');
-var trackingEndLocation = sessionStorage.getItem('endLoc');
-var trackingCurLocation = sessionStorage.getItem('curLoc');
-var trackingNum = sessionStorage.getItem('trackingID');
-var vehicleType = trackID.substr(-1);
-
-
+var myLoc = window.sessionStorage.getItem('myLoc');
+var myID = window.sessionStorage.getItem('myID');
+var obj1 = JSON.parse(myLoc);
+var trackingStartLocation = {lat:obj1.start[0], lon: obj1.start[1]};
+var trackingEndLocation = {lat:obj1.finish[0], lon: obj1.finish[1]};
+var trackingCurLocation = {lat:obj1.current[0], lon: obj1.current[1]};
+var trackingNum = myID;
+var vehicleType = trackingNum.substr(-1);
 
 //draw the map
 function GetMap()

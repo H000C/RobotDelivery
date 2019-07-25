@@ -1,20 +1,50 @@
-//set Location spots
-//var startLoc = { lat: 37.777481, lon: -122.432467 };
-//var endLoc = { lat: 37.783059, lon: -122.446494 };
-//var startStation = { lat: 37.771687, lon: -122.431694 };
-//var endStation = { lat: 37.787833, lon: -122.447744 };
+//station location
+const station1 = {lat: 37.73107, lon: -122.40907};
+const station2 = {lat: 37.754452,lon: -122.477165};
+const station3 = {lat: 37.782928,lon: -122.418996};
+//fetch location info for map
+var id = 'T1563330271894';// who gives the id?
+var methodChoice = JSON.stringify({  
+        orderid: id     
+       });
 
-var estPrice1= "10.6";
-var estPrice2= "15.3";
+fetch('/setOrder/getOptions', {  
+        method: 'POST',  
+        headers: {   
+         'Content-Type': 'application/json'  
+              },  
+        body: methodChoice 
+       })
+       .then(function (resp) {  
+        return resp.json();
+       }).then(function (myJSON) {  
+    	   //console.log(JSON.stringify(myJSON));
+    	   window.sessionStorage.setItem('infoLoc',JSON.stringify(myJSON)); 
+       })  
+//assign location info to variables	
+var infoLoc = window.sessionStorage.getItem('infoLoc');  
+var obj = JSON.parse(infoLoc);
 
-var startLoc = sessionStorage.getItem('startLoc');
-var endLoc = sessionStorage.getItem('endLoc');
-var startStation = sessionStorage.getItem('station1');
-var endStation = sessionStorage.getItem('station2');
+var startLoc = {lat:obj[0].pickupLatLon[0], lon:obj[0].pickupLatLon[1]};
+var endLoc = {lat:obj[0].dropoffLatLon[0], lon:obj[0].dropoffLatLon[1]};
+var startStation;
+if (obj[0].startStation == 1){
+	startStation = station1;
+}else if (obj[0].startStation == 2){
+	startStation = station2;
+}else if (obj[0].startStation == 3){
+	startStation = station3;
+}else{
+	console.log('wrong station lat&lon');
+}
 
+//Calculate price for both two shipping method
+var drone_dist = obj[1].initialDistance + obj[1].deliveryDistance + obj[1].returnDistance;
+var bot_dist = obj[0].initialDistance + obj[0].deliveryDistance + obj[0].returnDistance;
+var estPrice1= Math.round((drone_dist * 1)*100)*0.01;
+var estPrice2= Math.round((bot_dist * 0.7)*100)*0.01;
 //draw the map
-function GetMap()
-    {    
+function GetMap(){    
         var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
               credentials: 'AqDMxwwiD2P7-8TCvVyHmOnvrktdAqn7TXFYXDAYuLPhesaPHXin836RNWKAY6a_'
         });
@@ -25,8 +55,7 @@ function GetMap()
             zoom: 13,
         });
            
-        //decide the type of vehicle. polylines for robots/straight lines for UAVs
-        if (vehicleType == 'robot'){      
+        //decide the type of vehicle. polylines for robots/straight lines for UAVs 
             Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function showTrack() {
                 var color1 = Microsoft.Maps.Color.fromHex('#ff9e7b');
                 var color2 = Microsoft.Maps.Color.fromHex('#62a8fa');
@@ -55,7 +84,7 @@ function GetMap()
                                          location: new Microsoft.Maps.Location(startLoc.lat, startLoc.lon) });
                     directionsManager2.addWaypoint(firstWaypoint2);
                     var lastWaypoint1 = new Microsoft.Maps.Directions.Waypoint({ 
-                                          location: new Microsoft.Maps.Location(endLoc.lat, endLoc.lon) });
+                                          location: new Microsoft.Maps.Location(endLoc.lat, endLoc.lon)});
                     directionsManager2.addWaypoint(lastWaypoint1);
                     //add airline
                     var polyline2 = new Microsoft.Maps.Polyline([firstWaypoint2.getLocation(),
@@ -64,7 +93,7 @@ function GetMap()
                     map.entities.push(polyline2);
                 }
               
-               var directionsManager3 = new Microsoft.Maps.Directions.DirectionsManager(map);
+               /*var directionsManager3 = new Microsoft.Maps.Directions.DirectionsManager(map);
                 directionsManager3.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.walking });
                 if (directionsManager3.getAllWaypoints().length < 2) {
                     var lastWaypoint2 = new Microsoft.Maps.Directions.Waypoint({
@@ -79,7 +108,7 @@ function GetMap()
                                                                  { strokeColor: color1, strokeThickness: 6});
                     map.entities.push(polyline3);
                 }
-              
+              */
 
                 directionsManager1.setRenderOptions({
                     firstWaypointPushpinOptions: {
@@ -102,7 +131,7 @@ function GetMap()
                     firstWaypointPushpinOptions: {
                         draggable: false,
                         icon:'https://www.bingmapsportal.com/Content/images/poi_custom.png', 
-                        title:'Pickup',
+                        title:'Pickup Package',
                         text: ''
                     },                 
                     walkingPolylineOptions: {
@@ -110,11 +139,13 @@ function GetMap()
                         strokeThickness: 6
                     },
                    lastWaypointPushpinOptions: {
-                        draggable: false,
-                        visible: false
+                	   draggable: false,
+                       icon:'https://www.bingmapsportal.com/Content/images/poi_custom.png',
+                       title:'Destination',
+                       text: ''
                   }
                 });
-                 directionsManager3.setRenderOptions({
+                 /*directionsManager3.setRenderOptions({
                     firstWaypointPushpinOptions: {
                         draggable: false,
                         icon:'https://www.bingmapsportal.com/Content/images/poi_custom.png',
@@ -130,18 +161,14 @@ function GetMap()
                         icon:'https://www.bingmapsportal.com/Content/images/poi_custom.png',
                         title:'Station',
                         text: ''
-                  }
-                   
-                });  
+                  }          
+                });  */
                 directionsManager1.calculateDirections();
                 directionsManager2.calculateDirections();
-                directionsManager3.calculateDirections();
-                
+                //directionsManager3.calculateDirections();
             });
-        }else{
-          console.log("Error:wrong vehicle type");
-        } 
-    }
+}
+//display price
 document.getElementById("estPrice").innerHTML = estPrice1;
 function est1(){
   document.getElementById("estPrice").innerHTML = estPrice1;
