@@ -2,11 +2,9 @@ package springboot.service;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import springboot.ProjectConstants;
-import springboot.dao.OptionDAO;
 import springboot.external.BingMapAPI;
 import springboot.model.DeliverOption;
 import springboot.model.latlonGroup;
@@ -14,28 +12,31 @@ import springboot.model.latlonGroup;
 @Service
 public class CDHelper {
 	
-	@Autowired
-	OptionDAO optionDao;
-	
-	public latlonGroup getPhaseRoute(String Phase, DeliverOption option) {
+	public static latlonGroup getPhaseRoute(String Phase, DeliverOption option) {
 		latlonGroup llg = new latlonGroup();
 		if (Phase.equals("leaving")) {
 			llg.setStart(getStationCoord(option.getStartStation()));
 			llg.setStartAddr(getStationAddr(option.getStartStation()));
 			llg.setFinish(option.getPickupLatLon());
 			llg.setFinishAddr(option.getPickupLocation());
+			llg.setTraveled(0);
+			llg.setPhase("leaving");
 		}
 		else if (Phase.equals("pickup")) {
 			llg.setStart(option.getPickupLatLon());
 			llg.setStartAddr(option.getPickupLocation());
 			llg.setFinish(option.getDropoffLatLon());
 			llg.setFinishAddr(option.getDropoffLoaction());
+			llg.setTraveled(option.getInitialDistance());
+			llg.setPhase("delivering");
 		}
-		else if (Phase.equals("pickup")){
+		else if (Phase.equals("return")){
 			llg.setStart(option.getDropoffLatLon());
 			llg.setStartAddr(option.getDropoffLoaction());
 			llg.setFinish(getStationCoord(option.getEndStation()));
 			llg.setFinishAddr(getStationAddr(option.getEndStation()));
+			llg.setTraveled(option.getInitialDistance() + option.getDeliveryDistance());
+			llg.setPhase("returning");
 		}
 		else {
 			llg.setStart(option.getDropoffLatLon());
@@ -43,6 +44,8 @@ public class CDHelper {
 			llg.setCurrent(getStationCoord(option.getEndStation()));
 			llg.setFinish(getStationCoord(option.getEndStation()));
 			llg.setFinishAddr(getStationAddr(option.getEndStation()));
+			llg.setTraveled(option.getInitialDistance() + option.getDeliveryDistance());
+			llg.setPhase("finished");
 		}
 		return llg;
 	}
