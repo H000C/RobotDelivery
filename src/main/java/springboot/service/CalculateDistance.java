@@ -45,8 +45,7 @@ public class CalculateDistance {
 
     public latlonGroup DetectLocation(long currentTime,  DeliverOption uav, String phase)
     {
-    	CDHelper helper = new CDHelper();
-    	latlonGroup detail = helper.getPhaseRoute(phase, uav);
+    	latlonGroup detail = CDHelper.getPhaseRoute(phase, uav);
     	if (detail.getCurrent() != null) {
     		return detail;
     	}
@@ -58,11 +57,14 @@ public class CalculateDistance {
 
         if (uav.getTrackingid().substring(uav.getTrackingid().length() - 1).equals("R")){
             currentDistance = currentTime * 15/3600000;
-            detail = helper.getRobotTracking(detail, currentDistance);
+            currentDistance -= detail.getTraveled();
+            System.out.println("distance"+ currentDistance);
+            detail = CDHelper.getRobotTracking(detail, currentDistance);
         }
         else
             if (uav.getTrackingid().substring(uav.getTrackingid().length() - 1).equals("U")){
             currentDistance = currentTime * 40/3600000;
+            currentDistance -= detail.getTraveled();
             //lat is the first index of the double array, while lon is the second.
                 double latDistance = finish[0] - start[0];
                 double lonDistance = finish[1] - start[1];

@@ -59,7 +59,7 @@ public class LocationController {
 
 
         /// call DetectLocation to return double[] currentlocation
-        latlonGroup currentLocation = new CalculateDistance().DetectLocation(time - summary.getLeavingTime(), option, currentPhase);
+        latlonGroup currentLocation = new CalculateDistance().DetectLocation(time - leavingTime, option, currentPhase);
         /// add currentlocation to latlonGroup
 
         //?
