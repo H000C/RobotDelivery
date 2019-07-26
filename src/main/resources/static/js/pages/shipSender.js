@@ -22,18 +22,25 @@ document.getElementById('shipPageSender').addEventListener('submit', function (e
 		email: document.getElementById('senderEmail').value,
 		phone: document.getElementById('senderPhone').value
 	});
-	
+
 	fetch('/setOrder/setSender', {
 		method: 'POST',
 		headers: { 
 			'Content-Type': 'application/json'
         },
 		body: senderInfo
-	}).then(function (req) {
-		return req.json();
-	}).then(function (err) {
-		console.log(err);
+	}).then(function (response) {
+		return response.json();
+	}).then(function (myJson) {
+		console.log(JSON.stringify(myJson));
+		var obj = JSON.parse(JSON.stringify(myJson));
+		if (obj.address === "invalid address") {
+			document.getElementById("invalid-sender-address").style.display = "block";
+		} else {
+			document.getElementById("invalid-sender-address").style.display = "none";
+			self.location = "shipReceiver";
+		}
+	}).catch(function (error){
+		console.log(error);
 	})
-	
-	self.location = "shipReceiver";
 });

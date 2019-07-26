@@ -29,11 +29,18 @@ document.getElementById('shipPageReceiver').addEventListener('submit', function 
 			'Content-Type': 'application/json'
         },
 		body: receiverInfo
-	}).then(function (req) {
-		return req.json();
-	}).then(function (err) {
-		console.log(err);
+	}).then(function (response) {
+		return response.json();
+	}).then(function (myJson) {
+		console.log(JSON.stringify(myJson));
+		var obj = JSON.parse(JSON.stringify(myJson));
+		if (obj.address === "invalid address") {
+			document.getElementById("invalid-receiver-address").style.display = "block";
+		} else {
+			document.getElementById("invalid-receiver-address").style.display = "none";
+			self.location = "shipPackage";
+		}
+	}).catch(function (error){
+		console.log(error);
 	})
-	
-	self.location = "shipPackage";
 });

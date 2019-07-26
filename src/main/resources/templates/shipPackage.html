@@ -36,9 +36,14 @@
 		  <h3 class="text-center text-primary font-weight-bold mb-4">Package Info</h3>
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
-		      <label>Package Size (inch.)</label>
-		      <input type="text" class="form-control" id="packageSize" placeholder="Package Size" required="required" />
-		      <div class="invalid-feedback">Valid size required</div>
+		      <label for="inputPackageDimension">Package Dimension</label>
+        	  <select id="inputPackageDimension" class="form-control">
+          		<option selected="selected">Choose...</option>
+          		<option value="PackageDimensionSmall" >20" x 12" x 6" (small)</option>
+          		<option value="PackageDimensionMedium1"> 24" x 20" x 6" (medium)</option>
+               	<option value="PackageDimensionMedium2"> 20" x 12" x 12" (medium)</option>
+                <option value="PackageDimensionLarge"> 24" x 20" x 12" (large)</option>
+        	  </select>
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label>Package Weight (lb.)</label>
