@@ -60,8 +60,8 @@ public class OrderController {
 		if (sender.getOrderid() != null) return senderDao.save(sender);
 		String orderId = OrderService.generateOrder(sender);
 		sender.setOrderid(orderId);
-		historyService.setHistory(sender.getUsername(), orderId, 1);
-		emailService.sendTrackingId(sender.getEmail(), orderId);
+		//historyService.setHistory(sender.getUsername(), orderId, 1);
+		//emailService.sendTrackingId(sender.getEmail(), orderId);
 		return senderDao.save(sender);
 	}
 	
@@ -76,14 +76,7 @@ public class OrderController {
 		recipient.setOrderid(OrderService.generateOrder(recipient));
 		return recipientDao.save(recipient);
 	}
-	
-	/*
-	 * returns a HTML page under templates
-	 * which name is TrackOrder
-	 */
-	@RequestMapping("/trackOrder")
-	public String mapWebControl() {
-		return "TrackOrder";
-	}
-	
 }
+	
+
+

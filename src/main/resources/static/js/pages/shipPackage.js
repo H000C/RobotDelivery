@@ -1,7 +1,12 @@
 document.getElementById('shipPagePackage').addEventListener('submit', function (e) {
 	e.preventDefault();
+	
+	var nodeDimension = document.getElementById('inputPackageDimension');
+	
+	var strDimension = nodeDimension.options[nodeDimension.selectedIndex].value;
+		
 	var packageInfo = JSON.stringify({
-		size: document.getElementById('packageSize').value,
+		size: strDimension,
 		weight: document.getElementById('packageWeight').value,
 	});
 	
@@ -11,11 +16,15 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
 			'Content-Type': 'application/json'
         },
 		body: packageInfo
-	}).then(function (req) {
-		return req.json();
-	}).then(function (err) {
-		console.log(err);
-	})
+	}).then(res => res.json())
+	.then(response => console.log('Success:', JSON.stringify(response)))
+	.catch(error => console.error('Error:', error));
 	
-	self.location = "shipMethod";
+	if (strDimension === 'PackageDimensionChoose') {
+		document.getElementById("invalid-package-dimension").style.display = "block";
+	} else {
+		document.getElementById("invalid-package-dimension").style.display = "none";
+	    self.location = "shipMethod";
+	}
+	
 });

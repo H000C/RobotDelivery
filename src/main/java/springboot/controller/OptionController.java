@@ -82,7 +82,7 @@ public class OptionController {
 		}
 		JSONObject object = new JSONObject(trackingid);
 		System.out.println("Setting Option with " + object.getString("trackingid"));
-		String trackid = object.getString("trackingid"); // traking id
+		String trackid = object.getString("trackingid"); // tracking id
 		System.out.println(trackid);
 		
 		char[] c = trackid.toCharArray();
@@ -90,6 +90,7 @@ public class OptionController {
 		Package packageObject = packageDao.findOne(orderid);
 
 		if (packageObject == null) return null;
+		System.out.println("package object is not null");
 		
 		if (c[c.length -1] == 'U') {// UAV set
 			c[c.length -1] = 'R';

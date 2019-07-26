@@ -46,8 +46,8 @@ public class setController {
 	public String shipSuccessControl() {
 		return "shipSuccess";
 	}
-	@RequestMapping("/tracking")
+	@RequestMapping("/trackPackage")
 	public String trackingControl() {
-		return "tracking";
+		return "trackPackage";
 	}
 }
