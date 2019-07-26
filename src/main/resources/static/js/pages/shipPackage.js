@@ -20,14 +20,11 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
 	.then(response => console.log('Success:', JSON.stringify(response)))
 	.catch(error => console.error('Error:', error));
 	
-	//self.location = "shipMethod";
+	if (strDimension === 'PackageDimensionChoose') {
+		document.getElementById("invalid-package-dimension").style.display = "block";
+	} else {
+		document.getElementById("invalid-package-dimension").style.display = "none";
+	    self.location = "shipMethod";
+	}
+	
 });
-
-
-/*
-.then(function (req) {
-	return req.json();
-}).then(function (err) {
-	console.log(err);
-}).
-*/
