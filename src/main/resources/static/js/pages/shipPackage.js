@@ -10,24 +10,24 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
 		weight: document.getElementById('packageWeight').value,
 	});
 	
-	fetch('/setOrder/setPackage', {
-		method: 'POST',
-		headers: { 
-			'Content-Type': 'application/json'
-        },
-		body: packageInfo
-	}).then(res => res.json())
-	.then(response => console.log('Success:', JSON.stringify(response)))
-	.catch(error => console.error('Error:', error));
+	var formPagePackage = document.getElementById("shipPagePackage");
 	
-	//self.location = "shipMethod";
+	if (formPagePackage.checkValidity() === false) {
+		formPagePackage.classList.add('was-validated');
+	} else {
+		fetch('/setOrder/setPackage', {
+			method: 'POST',
+			headers: { 
+				'Content-Type': 'application/json'
+	        },
+			body: packageInfo
+		}).then(function (response) {
+			return response.json();
+		}).then(function (myJson) {
+			console.log(JSON.stringify(myJson));
+			self.location = "shipMethod";
+		}).catch(function (error){
+			console.log(error);
+		})		
+	}
 });
-
-
-/*
-.then(function (req) {
-	return req.json();
-}).then(function (err) {
-	console.log(err);
-}).
-*/
