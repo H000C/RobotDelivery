@@ -28,6 +28,7 @@ public class EmailService {
     	simpleMailMessage.setSubject("Tracking ID");
     	simpleMailMessage.setText(test);
 
+    	System.out.println(email);
     	javaMailSender.send(simpleMailMessage);
 	}
 

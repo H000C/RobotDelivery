@@ -33,6 +33,7 @@ import springboot.model.Package;
 import springboot.model.latlonGroup;
 import springboot.service.CDHelper;
 import springboot.service.DeliveryService;
+import springboot.service.EmailService;
 import springboot.service.OptionService;
 //import springboot.service.OptionService;
 
@@ -53,6 +54,9 @@ public class OptionController {
 	
 	@Autowired
 	PackageDAO packageDao;
+	
+	@Autowired
+	EmailService emailService;
 
 	// returns one option with robot and one option ith uav
 	@PostMapping ("/setOrder/getOptions")
@@ -109,6 +113,8 @@ public class OptionController {
 		// prepare a delivery summary
 		DeliveryService.setDeliverSummery(opt, summaryDao);
 		// set the delivery
+		emailService.sendTrackingId((senderDao.findOne(orderid)).getEmail(), trackingid);
+		emailService.sendTrackingId((recipientDao.findOne(orderid)).getEmail(), trackingid);
 		return DeliveryService.setDelivery(opt, optionDao);
 	}
 	

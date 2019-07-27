@@ -30,8 +30,26 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
 			return response.json();
 		}).then(function (myJson) {
 			console.log(JSON.stringify(myJson));
-      window.sessionStorage.setItem("orderid", JSON.parse(JSON.stringify(response)).orderid);
-			self.location = "shipMethod";
+			window.sessionStorage.setItem("orderid", JSON.parse(JSON.stringify(myJson)).orderid);
+			var id = window.sessionStorage.getItem('orderid');
+			var methodChoice = JSON.stringify({  
+		        orderid: id     
+		       });
+
+		fetch('/setOrder/getOptions', {  
+		        method: 'POST',  
+		        headers: {   
+		         'Content-Type': 'application/json'  
+		              },  
+		        body: methodChoice 
+		       })
+		       .then(function (resp) {  
+		        return resp.json();
+		       }).then(function (myJSON) {  
+		    	   //console.log(JSON.stringify(myJSON));
+		    	   window.sessionStorage.setItem('infoLoc',JSON.stringify(myJSON)); 
+		    	   self.location = "shipMethod";
+		       }) 
 		}).catch(function (error){
 			console.log(error);
 		})

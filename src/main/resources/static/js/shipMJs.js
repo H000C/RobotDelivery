@@ -3,28 +3,10 @@ const station1 = {lat: 37.73107, lon: -122.40907};
 const station2 = {lat: 37.754452,lon: -122.477165};
 const station3 = {lat: 37.782928,lon: -122.418996};
 //fetch location info for map
-var id = window.sessionStorage.getItem('orderid');
-var methodChoice = JSON.stringify({  
-        orderid: id     
-       });
-
-fetch('/setOrder/getOptions', {  
-        method: 'POST',  
-        headers: {   
-         'Content-Type': 'application/json'  
-              },  
-        body: methodChoice 
-       })
-       .then(function (resp) {  
-        return resp.json();
-       }).then(function (myJSON) {  
-    	   //console.log(JSON.stringify(myJSON));
-    	   window.sessionStorage.setItem('infoLoc',JSON.stringify(myJSON)); 
-       })  
 //assign location info to variables	
 var infoLoc = window.sessionStorage.getItem('infoLoc');  
 var obj = JSON.parse(infoLoc);
-
+console.log(obj);
 var startLoc = {lat:obj[0].pickupLatLon[0], lon:obj[0].pickupLatLon[1]};
 var endLoc = {lat:obj[0].dropoffLatLon[0], lon:obj[0].dropoffLatLon[1]};
 var startStation;
@@ -193,6 +175,7 @@ function est2(){
 document.getElementById('submit').addEventListener('click', function (e) {  
     e.preventDefault(); 
     window.sessionStorage.setItem("myMethod", myMethod);
+    console.log(myMethod);
     self.location = "paypal-transaction-complete";
     
 });

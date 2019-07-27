@@ -55,7 +55,7 @@
 		    </div>
 		  </div>
 		  
-		  <a id="pageToMethod" class="btn btn-primary" th:href="@{shipReceiver}">&#8249; Previous</a>
+		  <a onclick="goBack()" class="btn btn-primary" >&#8249; Previous</a>
 		  <button class="btn btn-primary" type="submit">Next &#8250;</button>
 		</form>
 	</div>
@@ -66,7 +66,10 @@
     	<br />
     	<p>Copyright © LAI-Team-2 2019</p>
 	</footer>
-	
+	<script> function goBack() {
+		window.history.back();
+		}
+	</script>
   <script th:src="@{/js/pages/shipPackage.js}"></script>
 	<script th:src="@{/js/auth.js}"></script>
 
