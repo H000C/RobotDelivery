@@ -1,34 +1,11 @@
-// Form Validation
-
-function validationFunc() {
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-};
-
-validationFunc();
-
-
 (function() {
 
     /**
      * Initialize
      */
     function init() {
-        // $('login-btn').addEventListener('click', login);
-        $('logout-link').addEventListener('click', logout);
-        validateSession();
+        $('login-btn').addEventListener('click', login)
+        onSessionInvalid();
     }
 
     /**
@@ -36,25 +13,21 @@ validationFunc();
      */
 
     function onSessionInvalid() {
+        var loginForm = $('login-form');
         var logout = $('logout-link');
-        var welcomeMsg = $('welcome-msg');
-        var registerLogin = $('register-login');
-        sessionStorage.removeItem('username');
-        showElement(registerLogin);
-        hideElement(welcomeMsg);
+        showElement(loginForm);
         hideElement(logout);
-
     }
 
-    function onSessionValid() {
-        var username = sessionStorage.getItem('username');
+    function onSessionValid(result) {
+        var username = result.username;
         var welcomeMsg = $('welcome-msg');
         var registerLogin = $('register-login');
         var logout = $('logout-link');
         welcomeMsg.innerHTML = 'Welcome, ' + username;
         showElement(welcomeMsg);
         showElement(logout);
-        hideElement(registerLogin);
+        // hideElement(registerLogin);
     }
 
 
@@ -62,18 +35,26 @@ validationFunc();
     // Login
     // -----------------------------------
 
-    function validateSession() {
+    function login() {
+        var username = $('username').value;
+        var password = $('password').value;
+        password = md5(username + md5(password));
 
         // The request parameters
-        var url = '../verifyLogin';
+        var url = '../login';
         var req = JSON.stringify({
-            username : sessionStorage.getItem('username')
-        });
+            username : username,
+            password : password,
+        })
 
         ajax('POST', url, req,
             // successful callback
             function(res) {
-                onSessionValid();
+                var result = JSON.parse(res);
+                sessionStorage.setItem("username", result.username);
+                onSessionValid(result);
+                console.log('in login function');
+                window.location.href = '../';
             },
 
             // error
@@ -82,8 +63,9 @@ validationFunc();
             });
     }
 
+
     function showLoginError(message) {
-        // $('login-error').innerHTML = message;
+        $('login-error').innerHTML = message;
     }
 
     function clearloginError() {
@@ -91,36 +73,9 @@ validationFunc();
     }
 
     // -----------------------------------
-    // Logout
-    // -----------------------------------
-
-    function logout() {
-        var url = '../logout';
-        var req = JSON.stringify({});
-
-        ajax('POST', url, req,
-            //sucessful callback
-            function (res) {
-                onSessionInvalid();
-                window.location.href = '../';
-            },
-            function (message) {
-                showLogoutError(message);
-            });
-    }
-
-    function showLogoutError(message) {
-        // $('login-error').innerHTML = message;
-    }
-
-    function clearlogoutError() {
-        $('signup-error').innerHTML = '';
-    }
-
-
-    // -----------------------------------
     // Helper Functions
     // -----------------------------------
+
 
 
     /**
@@ -179,7 +134,6 @@ validationFunc();
             } else if (xhr.status === 403) {
                 onSessionInvalid();
             } else {
-                onSessionInvalid();
                 errorHandler(xhr.responseText);
             }
 
