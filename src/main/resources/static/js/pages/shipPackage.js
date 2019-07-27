@@ -14,7 +14,11 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
 	
 	if (formPagePackage.checkValidity() === false) {
 		formPagePackage.classList.add('was-validated');
+	} else if (strDimension === 'PackageDimensionChoose') {
+		document.getElementById("invalid-package-dimension").style.display = "block";
 	} else {
+		document.getElementById("invalid-package-dimension").style.display = "none";
+		
 		fetch('/setOrder/setPackage', {
 			method: 'POST',
 			headers: { 
@@ -28,6 +32,6 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
 			self.location = "shipMethod";
 		}).catch(function (error){
 			console.log(error);
-		})		
+		})
 	}
 });

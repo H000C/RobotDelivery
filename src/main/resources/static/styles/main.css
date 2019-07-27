@@ -14,7 +14,7 @@
   	text-decoration: none;
 }
 
-#invalid-sender-address, #invalid-receiver-address {
+#invalid-sender-address, #invalid-receiver-address, #invalid-package-dimension {
 	display:none;
 }
 
