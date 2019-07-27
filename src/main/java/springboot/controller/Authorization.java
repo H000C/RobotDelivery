@@ -1,19 +1,19 @@
 package springboot.controller;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 import springboot.model.User;
 import springboot.service.EmailService;
 import springboot.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 @Controller
 public class Authorization {
@@ -38,20 +38,52 @@ public class Authorization {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(HttpSession session, @RequestBody User user) {
+    @ResponseBody
+    public User login(HttpSession session, @RequestBody User user) {
 
-        System.out.println("LOGIN");
+        System.out.println("LOGIN post");
         String username = user.getUsername();
         String password = user.getPassword();
         if (userService.findUser(username) == null) {
-            return ResponseEntity.status(401).body("Username do not exist!!");
+            ResponseEntity.status(401).body("Username do not exist!!");
         }
         if (userService.verifyLogin(username, password)) {
             session.setAttribute("username", username);
             session.setMaxInactiveInterval(600);
-            return ResponseEntity.status(HttpStatus.OK).body("Login successful!");
+            ResponseEntity.status(HttpStatus.OK).body("Login successful");
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Username or password is incorrect!!");
+            ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Username or password is incorrect!!");
+        }
+        return user;
+    }
+
+    @PostMapping("/verifyLogin")
+    public ResponseEntity verifyLogin(HttpSession session, @RequestBody String input) {
+
+        System.out.println("LOGIN get" + input.toString());
+        JSONObject jsonObject = new JSONObject(input);
+        String username = null;
+        if (jsonObject.get("username") != null) {
+            username = jsonObject.get("username").toString();
+        }
+        Object localSession = session.getAttribute("username");
+        if (session != null && username != null && localSession != null && localSession.equals(username)){
+            System.out.println("in if" + username);
+            session.setMaxInactiveInterval(600);
+            return ResponseEntity.status(HttpStatus.OK).body("Already login.");
+        } else {
+            System.out.println("in else");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Session is overdue!");
+        }
+    }
+
+    @PostMapping("/logout")
+    @ResponseBody
+    public void logout(HttpSession session) {
+        System.out.println("here is logout");
+        if (session != null) {
+            session.invalidate();
+            ResponseEntity.status(HttpStatus.OK).body("Login successful");
         }
 
     }
