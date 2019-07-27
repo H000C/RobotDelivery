@@ -23,26 +23,32 @@ document.getElementById('shipPageReceiver').addEventListener('submit', function 
 		email: document.getElementById('receiverEmail').value,
 		phone: document.getElementById('receiverPhone').value
 	});
+
+	var formPageReceiver = document.getElementById("shipPageReceiver");
 	
-	fetch('/setOrder/setRecipient', {
-		method: 'POST',
-		headers: { 
-			'Content-Type': 'application/json'
-        },
-		body: receiverInfo
-	}).then(function (response) {
-		return response.json();
-	}).then(function (myJson) {
-		console.log(JSON.stringify(myJson));
-		var obj = JSON.parse(JSON.stringify(myJson));
-		window.sessionStorage.setItem("orderid", obj.orderid);
-		if (obj.address === "invalid address") {
-			document.getElementById("invalid-receiver-address").style.display = "block";
-		} else {
-			document.getElementById("invalid-receiver-address").style.display = "none";
-			self.location = "shipPackage";
-		}
-	}).catch(function (error){
-		console.log(error);
-	})
+	if (formPageReceiver.checkValidity() === false) {
+		formPageReceiver.classList.add('was-validated');
+	} else {
+		fetch('/setOrder/setRecipient', {
+			method: 'POST',
+			headers: { 
+				'Content-Type': 'application/json'
+	        },
+			body: receiverInfo
+		}).then(function (response) {
+			return response.json();
+		}).then(function (myJson) {
+			console.log(JSON.stringify(myJson));
+			var obj = JSON.parse(JSON.stringify(myJson));
+      window.sessionStorage.setItem("orderid", obj.orderid);
+			if (obj.address === "invalid address") {
+				document.getElementById("invalid-receiver-address").style.display = "block";
+			} else {
+				document.getElementById("invalid-receiver-address").style.display = "none";
+				self.location = "shipPackage";
+			}
+		}).catch(function (error){
+			console.log(error);
+		})
+	}	
 });
