@@ -50,4 +50,12 @@ public class setController {
 	public String trackingControl() {
 		return "trackPackage";
 	}
+	@RequestMapping("/login")
+	public String loginControl() {
+		return "login";
+	}
+	@RequestMapping("/signup")
+	public String signupControl() {
+		return "signup";
+	}
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Shipping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&amp;display=swap"/>
+    <link rel="stylesheet" href="styles/main.css"/>
+</head>
+
+<body>
+<div class="container">
+    <header class="top-header py-3">
+        <h3 class='logo-text text-center'>
+            <a href=".">ROBOT DELIVERY</a>
+        </h3>
+    </header>
+    <div class="py-1 mb-2">
+        <nav class="nav nav-pills d-flex">
+            <a class="p-3 text-muted" href=".">Home</a>
+            <a class="p-3 text-muted" href="#">About</a>
+            <a class="p-3 text-muted" href="#">Contact</a>
+            <!--<a class="p-3 text-muted ml-auto" id="register-login" th:href="@{login}">Register/Login</a>-->
+            <a class="p-3 text-muted ml-auto"><span class="p-3 text-muted ml-auto" id="welcome-msg"></span></a>
+            <a class="p-3 text-muted ml-auto" id="logout-link" href="logout">Logout</a>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Shipping page #1 -->
+    <section class="main-section">
+        <div id="login-form">
+            <label for="username">Username:</label>
+            <input id="username" name="username" type="text"/>
+            <label for="password">Password:</label>
+            <input id="password" name="password" type="password"/>
+            <button id="login-btn">Login</button>
+            <p id="login-error"></p>
+
+            <p>New coustomer?
+                <a th:href="@{signup}">
+                    Sign up here
+                </a>
+            </p>
+        </div>
+    </section>
+</div>
+
+<footer class="pt-4 pb-1 text-center">
+    <p><strong>"We deliver your packages right."</strong></p>
+    <p>Built by <a href="https://github.com/H000C/RobotDelivery/network/members" target="_blank">LAI-Team-2</a></p>
+    <br/>
+    <p>Copyright © LAI-Team-2 2019</p>
+</footer>
+<script src="https://rawgit.com/emn178/js-md5/master/build/md5.min.js"></script>
+<script th:src="@{/js/login.js}"></script>
+
+</body>
+</html>
