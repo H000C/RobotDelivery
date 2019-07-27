@@ -6,6 +6,7 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
 	var strDimension = nodeDimension.options[nodeDimension.selectedIndex].value;
 		
 	var packageInfo = JSON.stringify({
+		orderid: window.sessionStorage.getItem('orderid'),
 		size: strDimension,
 		weight: document.getElementById('packageWeight').value,
 	});
@@ -17,7 +18,10 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
         },
 		body: packageInfo
 	}).then(res => res.json())
-	.then(response => console.log('Success:', JSON.stringify(response)))
+	.then(response => {
+		console.log('Success:', JSON.parse(JSON.stringify(response)).orderid)
+		window.sessionStorage.setItem("orderid", obj.orderid);
+	})
 	.catch(error => console.error('Error:', error));
 	
 	if (strDimension === 'PackageDimensionChoose') {
