@@ -23,24 +23,30 @@ document.getElementById('shipPageReceiver').addEventListener('submit', function 
 		phone: document.getElementById('receiverPhone').value
 	});
 	
-	fetch('/setOrder/setRecipient', {
-		method: 'POST',
-		headers: { 
-			'Content-Type': 'application/json'
-        },
-		body: receiverInfo
-	}).then(function (response) {
-		return response.json();
-	}).then(function (myJson) {
-		console.log(JSON.stringify(myJson));
-		var obj = JSON.parse(JSON.stringify(myJson));
-		if (obj.address === "invalid address") {
-			document.getElementById("invalid-receiver-address").style.display = "block";
-		} else {
-			document.getElementById("invalid-receiver-address").style.display = "none";
-			self.location = "shipPackage";
-		}
-	}).catch(function (error){
-		console.log(error);
-	})
+	var formPageReceiver = document.getElementById("shipPageReceiver");
+	
+	if (formPageReceiver.checkValidity() === false) {
+		formPageReceiver.classList.add('was-validated');
+	} else {
+		fetch('/setOrder/setRecipient', {
+			method: 'POST',
+			headers: { 
+				'Content-Type': 'application/json'
+	        },
+			body: receiverInfo
+		}).then(function (response) {
+			return response.json();
+		}).then(function (myJson) {
+			console.log(JSON.stringify(myJson));
+			var obj = JSON.parse(JSON.stringify(myJson));
+			if (obj.address === "invalid address") {
+				document.getElementById("invalid-receiver-address").style.display = "block";
+			} else {
+				document.getElementById("invalid-receiver-address").style.display = "none";
+				self.location = "shipPackage";
+			}
+		}).catch(function (error){
+			console.log(error);
+		})
+	}	
 });
