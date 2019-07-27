@@ -3,7 +3,7 @@ const station1 = {lat: 37.73107, lon: -122.40907};
 const station2 = {lat: 37.754452,lon: -122.477165};
 const station3 = {lat: 37.782928,lon: -122.418996};
 //fetch location info for map
-var id = 'T1563330271894';// who gives the id?
+var id = window.sessionStorage.getItem('orderid');
 var methodChoice = JSON.stringify({  
         orderid: id     
        });
@@ -41,8 +41,11 @@ if (obj[0].startStation == 1){
 //Calculate price for both two shipping method
 var drone_dist = obj[1].initialDistance + obj[1].deliveryDistance + obj[1].returnDistance;
 var bot_dist = obj[0].initialDistance + obj[0].deliveryDistance + obj[0].returnDistance;
-var estPrice1= Math.round((drone_dist * 1)*100)*0.01;
-var estPrice2= Math.round((bot_dist * 0.7)*100)*0.01;
+var estPrice2= Math.round((drone_dist * 1)*100)/100;
+var estPrice1= Math.round((bot_dist * 0.6)*100)/100;
+var estTime2= Math.round(drone_dist/40*10)/10;
+var estTime1= Math.round(bot_dist/15*10)/10;
+var myMethod = true;
 //draw the map
 function GetMap(){    
         var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
@@ -170,13 +173,29 @@ function GetMap(){
 }
 //display price
 document.getElementById("estPrice").innerHTML = estPrice1;
+document.getElementById("estTime").innerHTML = estTime1;
+window.sessionStorage.setItem("estPrice", estPrice1);
+window.sessionStorage.setItem("estTime", estTime1);
 function est1(){
   document.getElementById("estPrice").innerHTML = estPrice1;
+  document.getElementById("estTime").innerHTML = estTime1;
+  window.sessionStorage.setItem("estPrice", estPrice1);
+  window.sessionStorage.setItem("estTime", estTime1);
+  myMethod = true;
 }
 function est2(){
   document.getElementById("estPrice").innerHTML = estPrice2;
+  document.getElementById("estTime").innerHTML = estTime2;
+  window.sessionStorage.setItem("estPrice", estPrice2);
+  window.sessionStorage.setItem("estTime", estTime2);
+  myMethod = false;
 }
-
+document.getElementById('submit').addEventListener('click', function (e) {  
+    e.preventDefault(); 
+    window.sessionStorage.setItem("myMethod", myMethod);
+    self.location = "paypal-transaction-complete";
+    
+});
 
 
 

@@ -6,10 +6,11 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
 	var strDimension = nodeDimension.options[nodeDimension.selectedIndex].value;
 		
 	var packageInfo = JSON.stringify({
+		orderid: window.sessionStorage.getItem('orderid'),
 		size: strDimension,
 		weight: document.getElementById('packageWeight').value,
 	});
-	
+
 	var formPagePackage = document.getElementById("shipPagePackage");
 	
 	if (formPagePackage.checkValidity() === false) {
@@ -29,6 +30,7 @@ document.getElementById('shipPagePackage').addEventListener('submit', function (
 			return response.json();
 		}).then(function (myJson) {
 			console.log(JSON.stringify(myJson));
+      window.sessionStorage.setItem("orderid", JSON.parse(JSON.stringify(response)).orderid);
 			self.location = "shipMethod";
 		}).catch(function (error){
 			console.log(error);

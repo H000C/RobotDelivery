@@ -34,8 +34,18 @@
 			</nav>
 		</div>
 	 </div>
-	    
-  <div>Done</div>
+	 
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=sb">
+  </script>
+ <h4 id="textalert" class="text-center text-primary font-weight-bold mb-4">Estimate price: $<span id="estPrice"></span>,  Estimate time: <span id="estTime"></span> hour(s)</h4>
+ 
+ <p class="text-center text-secondary font-weight-bold mb-4">Starting Address: <span id="sAddress"></span> </p>  
+ <p class="text-center text-secondary font-weight-bold mb-4"> Finishing Address: <span id="fAddress"></span></p>
+  <div id="notpayed"><div id="paypal-button-container" align="center"></div></div>
+  <h5 id="havepayed" class="text-center text-primary font-weight-bold mb-4"></h5>
+
+  <script src="js/Payment.js"> </script>
   
     <footer class="pt-4 pb-1 text-center">
 	    <p><strong>"We deliver your packages right."</strong></p>

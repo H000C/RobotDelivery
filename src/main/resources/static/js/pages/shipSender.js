@@ -16,6 +16,7 @@ document.getElementById('shipPageSender').addEventListener('submit', function (e
 	}
 	
 	var senderInfo = JSON.stringify({
+		orderid: window.sessionStorage.getItem('orderid'),
 		firstname: document.getElementById('senderFn').value,
 		lastname: document.getElementById('senderLn').value,
 		address: senderFullAddress,
@@ -40,6 +41,7 @@ document.getElementById('shipPageSender').addEventListener('submit', function (e
 		}).then(function (myJson) {
 			console.log(JSON.stringify(myJson));
 			var obj = JSON.parse(JSON.stringify(myJson));
+      window.sessionStorage.setItem("orderid", obj.orderid);
 			if (obj.address === "invalid address") {
 				document.getElementById("invalid-sender-address").style.display = "block";
 			} else {
