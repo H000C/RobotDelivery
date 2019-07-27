@@ -93,7 +93,7 @@
 		    </div>
 		  </div>
 		  		  
-		  <a class="btn btn-primary" th:href="@{shipSender}">&#8249; Previous</a>
+		  <a class="btn btn-primary" onclick="goBack()">&#8249; Previous</a>
 		  <button class="btn btn-primary" type="submit">Next &#8250;</button>
 		</form>
 	</div>
@@ -104,7 +104,10 @@
     	<br />
     	<p>Copyright © LAI-Team-2 2019</p>
 	</footer>
-	
+	<script> function goBack() {
+		window.history.back();
+		}
+	</script>
     <script th:src="@{/js/pages/shipReceiver.js}"></script>
 	<script th:src="@{/js/auth.js}"></script>
 </body>
