@@ -13,9 +13,8 @@
  */
 package springboot.view;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -35,12 +34,20 @@ public class setController {
 	public String shipReceiverControl() {
 		return "shipReceiver";
 	}
+	@RequestMapping("/shipPackage")
+	public String shipPackageControl() {
+		return "shipPackage";
+	}
 	@RequestMapping("/shipMethod")
 	public String shipMethodControl() {
 		return "shipMethod";
 	}
-	@RequestMapping("/tracking")
+	@RequestMapping("/shipSuccess")
+	public String shipSuccessControl() {
+		return "shipSuccess";
+	}
+	@RequestMapping("/trackPackage")
 	public String trackingControl() {
-		return "tracking";
+		return "trackPackage";
 	}
 }

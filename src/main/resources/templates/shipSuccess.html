@@ -11,9 +11,6 @@
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&amp;display=swap" />
 	<link rel="stylesheet" href="styles/main.css" />
-	<script type='text/javascript'
-	          src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap'>
-	</script>
 </head>
 
 <body>
@@ -34,28 +31,17 @@
 	</div>
 
 	<div class="container">
-		<form id="shipPageMethod" class="border border-primary rounded shippingFrm"
-			novalidate="novalidate">
-		  <h3 class="text-center text-primary font-weight-bold mb-4">Choose a Delivery Method</h3>
-		  <div class="custom-control custom-radio custom-control-inline">
-		      <input type="radio" id="radioBot" name="optionRadio" class="custom-control-input" checked="checked" onclick="est1()"/>
-		      <label class="custom-control-label" for="radioBot" style="color:#62a8fa">Bot</label>
-		  </div>
-		  <div class="custom-control custom-radio custom-control-inline">
-		    <input type="radio" id="radioDrone" name="optionRadio" class="custom-control-input" onclick="est2()"/>
-		    <label class="custom-control-label" for="radioDrone" style="color:#ff9e7b">Drone</label>
+		<form id="shipPageSuccess" class="border border-primary rounded shippingFrm">
+		  <h3 class="text-center text-primary font-weight-bold mb-4">Congratulations, your delivery is completed!</h3>
+		  <!-- 
+		  <div class="">
+		      <label class="" for="deliveryInfo">info is here</label>
 		  </div>
 		  <br/><br/>
-		  <p class="text-center text-primary font-weight-bold mb-4">Estimate price: $<span id="estPrice"></span></p>
-          <div id="myMap" style="position:center; height:400px; border: none;" class="ml-1 mr-2">     
-          </div>
-		  <a id="pageToReceiver" class="btn btn-primary" th:href="@{shipPackage}">&#8249; Previous</a>
-		  <button class="btn btn-primary" type="submit">Submit</button>
-		  
+		   -->
+		  <a id="pageToHome" class="btn btn-primary" th:href="@{shipPackage}">Back to Home Page</a>		  
 		</form>
-		<div id="paypal-button-container" align="center"></div>
 	</div>
-	  <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
 
   	<footer class="pt-4 pb-1 text-center">
 	    <p><strong>"We deliver your packages right."</strong></p>
@@ -64,7 +50,6 @@
     	<p>Copyright © LAI-Team-2 2019</p>
 	</footer>
 	
-	<script th:src="@{/js/shipMJs.js}"></script>
-    
+	<script th:src="@{/js/main.js}"></script>	
 </body>
 </html>

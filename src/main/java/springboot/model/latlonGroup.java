@@ -5,6 +5,10 @@ public class latlonGroup {
 	private double[] start;
 	private double[] current;
 	private double[] finish;
+	private String startAddr;
+	private String finishAddr;
+	private String phase;
+	private double traveled;
 	public double[] getStart() {
 		return start;
 	}
@@ -23,5 +27,30 @@ public class latlonGroup {
 	public void setFinish(double[] finish) {
 		this.finish = finish;
 	}
+	public String getStartAddr() {
+		return startAddr;
+	}
+	public void setStartAddr(String startAddr) {
+		this.startAddr = startAddr;
+	}
+	public String getFinishAddr() {
+		return finishAddr;
+	}
+	public void setFinishAddr(String finishAddr) {
+		this.finishAddr = finishAddr;
+	}
+	public String getPhase() {
+		return phase;
+	}
+	public void setPhase(String phase) {
+		this.phase = phase;
+	}
+	public double getTraveled() {
+		return traveled;
+	}
+	public void setTraveled(double traveled) {
+		this.traveled = traveled;
+	}
+	
 	
 }

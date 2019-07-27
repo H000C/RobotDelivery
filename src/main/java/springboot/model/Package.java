@@ -25,8 +25,7 @@ public class Package {
     //weight cost double ?
 
     @Id
-    private String  orderid;
-
+    private String orderid;
 
     private String serviceType;
     

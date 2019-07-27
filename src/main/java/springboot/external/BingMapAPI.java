@@ -23,6 +23,8 @@ public class BingMapAPI {
 	private static final String URL = "http://dev.virtualearth.net/REST/v1/";
 	private static final String DEFAULT_KEYWORD = ""; // no restriction
 	private static final String API_KEY = ProjectConstants.BingMapKey;
+
+	
 	// takes in a wordy address, return a point on map
 	public static PointOnMap findLocation(String address) {
 		String location = address;
@@ -89,7 +91,7 @@ public class BingMapAPI {
 	/* takes 2 address and a enabling boolean, return information of a route as a JsonObject
 	 * {
 	 *     "distance": 10.0 (double),
-	 *     "detail" : ... (JsonArray), (see bing map routeLeg)
+	 *     "directions" : ... (JsonArray), (see bing map routeLeg)
 	 *     "valid" : true (boolean) (whether the operation is valid)
 	 * }
 	 */

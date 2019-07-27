@@ -14,9 +14,18 @@
   	text-decoration: none;
 }
 
+#invalid-sender-address, #invalid-receiver-address, #invalid-package-dimension {
+	display:none;
+}
+
 .trackingFrm, .shippingFrm {
     padding: 2rem;
     margin: 2rem 0;
+}
+
+#shipPageMethod button {
+	background-color: darkblue;
+	border-color: darkblue;
 }
 
 footer {
