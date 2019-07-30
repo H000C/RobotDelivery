@@ -11,24 +11,25 @@ import java.io.IOException;
 
 @Service
 public class EmailService {
-    @Autowired
-    private JavaMailSender javaMailSender;
+	@Autowired
+	private JavaMailSender javaMailSender;
 
-    public void sendTrackingId(String email, String trackingId) {
-    	ResourcePropertySource resourcePropertySource = null;
+	public void sendTrackingId(String email, String trackingId) {
+		ResourcePropertySource resourcePropertySource = null;
 		try {
 			resourcePropertySource = new ResourcePropertySource("resoutces", "classpath:application.properties");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-    	String test = "Your tracking id is " + trackingId;
-    	simpleMailMessage.setFrom(resourcePropertySource.getProperty("spring.mail.username").toString());
-    	simpleMailMessage.setTo(email);
-    	simpleMailMessage.setSubject("Tracking ID");
-    	simpleMailMessage.setText(test);
+		String test = "Your tracking id is " + trackingId;
+		simpleMailMessage.setFrom(resourcePropertySource.getProperty("spring.mail.username").toString());
+		simpleMailMessage.setTo(email);
+		simpleMailMessage.setSubject("Tracking ID");
+		simpleMailMessage.setText(test);
 
-    	javaMailSender.send(simpleMailMessage);
+		System.out.println(email);
+		javaMailSender.send(simpleMailMessage);
 	}
 
 }

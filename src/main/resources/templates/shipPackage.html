@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Shipping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata&amp;display=swap" />
+    <link rel="stylesheet" href="styles/main.css" />
+</head>
+
+<body>
+<div class="container">
+    <header class="top-header py-3">
+        <h3 class='logo-text text-center'>
+            <a href=".">ROBOT DELIVERY</a>
+        </h3>
+    </header>
+    <div class="py-1 mb-2">
+        <nav class="nav nav-pills d-flex">
+            <a class="p-3 text-muted mr1" href=".">Home</a>
+            <a class="p-3 text-muted mr1" href="#">About</a>
+            <a class="p-3 text-muted mr1" href="#">Contact</a>
+            <a class="p-3 text-muted ml-auto" id="register-login" th:href="@{login}">Register/Login</a>
+            <a class="p-3 text-muted ml-auto" id="welcome-msg"></a>
+            <a class="p-3 text-muted ml1" id="logout-link" href="logout">Logout</a>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <form id="shipPagePackage" class="border border-primary rounded shippingFrm needs-validation"
+          novalidate="novalidate">
+        <h3 class="text-center text-primary font-weight-bold mb-4">Package Info</h3>
+        <div id="invalid-package-dimension" class="text-center text-danger border border-danger alert alert-danger">Please select a package dimension.</div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputPackageDimension">Package Dimension</label>
+                <select id="inputPackageDimension" class="form-control">
+                    <option value="PackageDimensionChoose" selected="selected">Choose...</option>
+                    <option value="PackageDimensionSmall" >20" x 12" x 6" (small)</option>
+                    <option value="PackageDimensionMedium1"> 24" x 20" x 6" (medium)</option>
+                    <option value="PackageDimensionMedium2"> 20" x 12" x 12" (medium)</option>
+                    <option value="PackageDimensionLarge"> 24" x 20" x 12" (large)</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Package Weight (lb.)</label>
+                <input type="text" class="form-control" id="packageWeight" placeholder="Package Weight" required="required" />
+                <div class="invalid-feedback">Valid weight required</div>
+            </div>
+        </div>
+
+        <a onclick="goBack()" class="btn btn-primary" >&#8249; Previous</a>
+        <button class="btn btn-primary" type="submit">Next &#8250;</button>
+    </form>
+</div>
+
+<footer class="pt-4 pb-1 text-center">
+    <p><strong>"We deliver your packages right."</strong></p>
+    <p>Built by <a href="https://github.com/H000C/RobotDelivery/network/members" target="_blank">LAI-Team-2</a></p>
+    <br />
+    <p>Copyright © LAI-Team-2 2019</p>
+</footer>
+<script> function goBack() {
+    window.history.back();
+}
+</script>
+<script th:src="@{/js/pages/shipPackage.js}"></script>
+<script th:src="@{/js/auth.js}"></script>
+
+</body>
+</html>

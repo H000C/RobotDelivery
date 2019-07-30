@@ -2,12 +2,12 @@
  * OrderController (Request Handler):
  *     Handles Get, Post requests from order related tasks
  *     automatic conversion between jsonObject and object
- *     
+ *
  * Requests:
  *      Post /setOrder/setSender (return Sender)
  *      Post /setOrder/setRecipient (return Recipient)
  *      Get /trackOrder (return HTML)
- *     
+ *
  * Created by: Haochen Liu
  * Modified by: Haochen Liu
  */
@@ -37,10 +37,10 @@ import springboot.service.OrderService;
 
 @Controller
 public class OrderController {
-	
+
 	@Autowired
 	SenderDAO senderDao;
-	
+
 	@Autowired
 	RecipientDAO recipientDao;
 
@@ -49,10 +49,10 @@ public class OrderController {
 
 	@Autowired
 	EmailService emailService;
-	
+
 	/*
 	 * saves an instance of sender into sender table
-	 * returns the saved instance 
+	 * returns the saved instance
 	 */
 	@PostMapping("/setOrder/setSender")
 	@ResponseBody
@@ -60,14 +60,14 @@ public class OrderController {
 		if (sender.getOrderid() != null) return senderDao.save(sender);
 		String orderId = OrderService.generateOrder(sender);
 		sender.setOrderid(orderId);
-		historyService.setHistory(sender.getUsername(), orderId, 1);
-		emailService.sendTrackingId(sender.getEmail(), orderId);
+		//historyService.setHistory(sender.getUsername(), orderId, 1);
+		//emailService.sendTrackingId(sender.getEmail(), orderId);
 		return senderDao.save(sender);
 	}
-	
+
 	/*
 	 * saves an instance of recipient into recipient table
-	 * returns the saved instance 
+	 * returns the saved instance
 	 */
 	@PostMapping("/setOrder/setRecipient")
 	@ResponseBody
@@ -76,14 +76,7 @@ public class OrderController {
 		recipient.setOrderid(OrderService.generateOrder(recipient));
 		return recipientDao.save(recipient);
 	}
-	
-	/*
-	 * returns a HTML page under templates
-	 * which name is TrackOrder
-	 */
-	@RequestMapping("/trackOrder")
-	public String mapWebControl() {
-		return "TrackOrder";
-	}
-	
 }
+
+
+

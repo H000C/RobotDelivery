@@ -13,45 +13,51 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name="deliverOption")
 @EntityListeners(AuditingEntityListener.class)
 public class DeliverOption {
-	
+
 	@Id
 	private String Trackingid;
-	
+
 	@NotBlank
 	private String DeliveryOption;
-	
+
 	@NotNull
 	private int startStation;
-	
+
 	@NotBlank
 	private String pickupLocation;
-	
+
+	private double[] pickupLatLon;
+
 	@NotBlank
 	private String dropoffLoaction;
-	
+
+	private double[] dropoffLatLon;
+
 	@NotNull
 	private int endStation;
-	
+
 	@NotNull
 	private double initialDistance;
-	
+
 	@NotNull
 	private double deliveryDistance;
-	
+
 	@NotNull
 	private double returnDistance;
-	
+
 	private String arrivingTime;
 
 	public DeliverOption(String trackingid, String deliveryOption, int startStation, String pickupLocation,
-			String dropoffLoaction, int endStation, double initialDistance, double deliveryDistance,
-			double returnDistance, String arrivingTime) {
+						 double[] pickupLatLon, String dropoffLoaction, double[] dropoffLatLon, int endStation,
+						 double initialDistance, double deliveryDistance, double returnDistance, String arrivingTime) {
 		super();
 		Trackingid = trackingid;
 		DeliveryOption = deliveryOption;
 		this.startStation = startStation;
 		this.pickupLocation = pickupLocation;
+		this.pickupLatLon = pickupLatLon;
 		this.dropoffLoaction = dropoffLoaction;
+		this.dropoffLatLon = dropoffLatLon;
 		this.endStation = endStation;
 		this.initialDistance = initialDistance;
 		this.deliveryDistance = deliveryDistance;
@@ -143,5 +149,20 @@ public class DeliverOption {
 		this.arrivingTime = arrivingTime;
 	}
 
-	
+	public double[] getPickupLatLon() {
+		return pickupLatLon;
+	}
+
+	public void setPickupLatLon(double[] pickupLatLon) {
+		this.pickupLatLon = pickupLatLon;
+	}
+
+	public double[] getDropoffLatLon() {
+		return dropoffLatLon;
+	}
+
+	public void setDropoffupLatLon(double[] dropoffLatLon) {
+		this.dropoffLatLon = dropoffLatLon;
+	}
+
 }

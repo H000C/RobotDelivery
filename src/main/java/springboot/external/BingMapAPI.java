@@ -15,14 +15,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import springboot.ProjectConstants;
 import springboot.model.PointOnMap;
 
 @Service
 public class BingMapAPI {
 	private static final String URL = "http://dev.virtualearth.net/REST/v1/";
 	private static final String DEFAULT_KEYWORD = ""; // no restriction
-	private static final String API_KEY = "";
-	
+	private static final String API_KEY = ProjectConstants.BingMapKey;
+
+
 	// takes in a wordy address, return a point on map
 	public static PointOnMap findLocation(String address) {
 		String location = address;
@@ -36,37 +38,37 @@ public class BingMapAPI {
 			e.printStackTrace();
 		}
 		String url = URL + location + "?o=json&key=" + API_KEY;
-		
+
 		try {
 			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
 			connection.setRequestMethod("GET");
-			
+
 			int responseCode = connection.getResponseCode();
 			System.out.println("Sending request to url: " + url);
 			System.out.println("Response code: " + responseCode);
-			
+
 			if (responseCode != 200) {
 				return new PointOnMap(false, "invalid address", 0, 0);
 			}
-			
+
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String line;
 			StringBuilder response = new StringBuilder();
-			
+
 			while ((line = reader.readLine()) != null) {
 				response.append(line);
 			}
 			reader.close();
 			JSONObject obj = new JSONObject(response.toString());
-			
+
 			boolean validation = false;
 			JSONArray coordinates = new JSONArray();
-			
+
 			if (!obj.isNull("resourceSets")) {
-				
+
 				JSONArray resourceSet = obj.getJSONArray("resourceSets");
 				if(!resourceSet.isNull(0) && !(resourceSet.getJSONObject(0)).isNull("resources")) {
-					
+
 					JSONArray resource = resourceSet.getJSONObject(0).getJSONArray("resources");
 					if(!resource.isNull(0) && !(resource.getJSONObject(0)).isNull("point") && !(resource.getJSONObject(0)).isNull("confidence")) {
 						String buffer = resource.getJSONObject(0).getString("confidence");
@@ -85,21 +87,21 @@ public class BingMapAPI {
 		}
 		return new PointOnMap(false, "invalid address", 0, 0);
 	}
-	
+
 	/* takes 2 address and a enabling boolean, return information of a route as a JsonObject
 	 * {
 	 *     "distance": 10.0 (double),
-	 *     "detail" : ... (JsonArray), (see bing map routeLeg)
+	 *     "directions" : ... (JsonArray), (see bing map routeLeg)
 	 *     "valid" : true (boolean) (whether the operation is valid)
 	 * }
 	 */
 	public static JSONObject findRoute(String address1, String address2, boolean detail) {
-		
+
 		if (address1 == null || address2 == null) {
 			address1 = address2 = DEFAULT_KEYWORD;
 			return null;
 		}
-		
+
 		try {
 			address1 = URLEncoder.encode(address1, "UTF-8"); //"Rick Sun" => "Rick%20Sun"
 			address2 = URLEncoder.encode(address2, "UTF-8");
@@ -110,15 +112,15 @@ public class BingMapAPI {
 
 		String query = String.format("wp.0=%s&wp.1=%s&optmz=distance&output=json&key=%s",address1, address2, API_KEY );
 		String url = URL + "Routes/Walking?" + query;
-		
+
 		try {
 			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
 			connection.setRequestMethod("GET");
-			
+
 			int responseCode = connection.getResponseCode();
 			System.out.println("Sending request to url: " + url);
 			System.out.println("Response code: " + responseCode);
-			
+
 			if (responseCode != 200) {
 				JSONObject error = new JSONObject();
 				error.put("valid", false);
@@ -128,16 +130,16 @@ public class BingMapAPI {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String line;
 			StringBuilder response = new StringBuilder();
-			
+
 			while ((line = reader.readLine()) != null) {
 				response.append(line);
 			}
 			reader.close();
 			JSONObject obj = new JSONObject(response.toString());
 			JSONObject new_obj = new JSONObject();
-			
+
 			if (!obj.isNull("resourceSets")) {
-				
+
 				JSONArray resourceSet = obj.getJSONArray("resourceSets");
 				if(!resourceSet.isNull(0) && !(resourceSet.getJSONObject(0)).isNull("resources")) {
 					JSONArray resource = resourceSet.getJSONObject(0).getJSONArray("resources");

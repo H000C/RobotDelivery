@@ -14,16 +14,16 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class DeliverSummary {
 	@Id
 	private String Trackingid;
-	
+
 	@NotNull
 	private long leavingTime;
-	
+
 	@NotNull
 	private long pickupTime;
-	
+
 	@NotNull
 	private long dropoffTime;
-	
+
 	@NotNull
 	private long returnTime;
 
@@ -35,7 +35,7 @@ public class DeliverSummary {
 		this.dropoffTime = dropoffTime;
 		this.returnTime = returnTime;
 	}
-	
+
 	public DeliverSummary() {
 		super();
 	}
@@ -79,5 +79,5 @@ public class DeliverSummary {
 	public void setReturnTime(long returnTime) {
 		this.returnTime = returnTime;
 	}
-	
+
 }

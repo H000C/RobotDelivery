@@ -24,9 +24,9 @@ import java.util.Date;
 @Controller
 public class LocationController {
 
-@Autowired
+    @Autowired
     SummaryDAO summaryDao;
-@Autowired
+    @Autowired
     OptionDAO OptionDao;
 
 
@@ -41,6 +41,7 @@ public class LocationController {
 
         JSONObject object1 = new JSONObject(trackingId);
         String trackid = object1.getString("trackingid"); // trackid is the real traking id
+        System.out.println(trackid);
         //get current time
         Date date = new Date();
         long time = date.getTime();// timestamp
@@ -57,29 +58,13 @@ public class LocationController {
         DeliverOption option = OptionDao.findOne(trackid);
 
 
-        /// call function ***getPhaseRoute(String Phase, String trackingid), which returns a latlonGroup
-        latlonGroup hi = new CalculateDistance().getPhaseRoute(currentPhase,trackid);
-        /// shy221 can write a fake getPhaseRoute function
-
-
         /// call DetectLocation to return double[] currentlocation
-        double[] currentLocation = new CalculateDistance().DetectLocation(time, option, trackid, currentPhase);
-        new latlonGroup().setCurrent(currentLocation);
+        latlonGroup currentLocation = new CalculateDistance().DetectLocation(time - leavingTime, option, currentPhase);
         /// add currentlocation to latlonGroup
 
         //?
-        return hi;
+        return currentLocation;
 
 
     }
 }
-
-
-
-
-
-
-
-
-
-

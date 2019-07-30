@@ -4,56 +4,81 @@
      * Initialize
      */
     function init() {
-        $('login-btn').addEventListener('click', login)
-
+        // Register event listeners
+        onSessionInvalid();
+        $('signup-btn').addEventListener('click',signup);
     }
 
     /**
      * Session
      */
 
+
+    function onSessionValid() {
+        var signupForm = $('signup-form');
+        var signupSuccess = $('signup-success');
+        showElement(signupSuccess);
+        hideElement(signupForm);
+    }
+
     function onSessionInvalid() {
-        var loginForm = $('login-form');
-        showElement(loginForm);
+        var signupForm = $('signup-form');
+        var signupSuccess = $('signup-success');
+        showElement(signupForm);
+        hideElement(signupSuccess);
     }
 
 
+
+
     // -----------------------------------
-    // Login
+    // Sign up
     // -----------------------------------
 
-    function login() {
+    function signup() {
         var username = $('username').value;
         var password = $('password').value;
+        var reenterPassword = $('re-enter-password').value;
+
+        if (username === '' || password === '' || reenterPassword === '') {
+            showSignupError('Please fill all blanks!');
+            return;
+        }
+        if (password !== reenterPassword) {
+            showSignupError('Passwords not match!');
+            return;
+        }
         password = md5(username + md5(password));
 
         // The request parameters
-        var url = '../login';
+        var url = '../signup';
         var req = JSON.stringify({
             username : username,
             password : password,
         })
 
+        console.log('url in js: ');
         ajax('POST', url, req,
             // successful callback
-            function() {
-                window.location.href = '../index.html';//need specify
+            function(res) {
+                onSessionValid();
             },
 
             // error
             function(message) {
-                showLoginError(message);
+                showSignupError(message);
             });
     }
 
 
-    function showLoginError(message) {
-        $('login-error').innerHTML = message;
+    function showSignupError(message) {
+        $('signup-error').innerHTML = message;
     }
 
-    function clearloginError() {
+    function clearSignupError() {
         $('signup-error').innerHTML = '';
     }
+
 
     // -----------------------------------
     // Helper Functions
@@ -116,7 +141,7 @@
             } else if (xhr.status === 403) {
                 onSessionInvalid();
             } else {
-                errorHandler(xhr.responseText);
+                errorHandler(xhr.body);
             }
 
         };

@@ -2,7 +2,7 @@
  * Recipient Model (Dynamic Data Structure):
  *     matches attributes in the recipient table
  *     automatically creates the recipient table in database
- *     
+ *
  * Created by: Haochen Liu
  */
 
@@ -27,38 +27,38 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Recipient {
 	@Id
 	private String  orderid;
-	
+
 	@NotBlank
-	private String firstname; 
-	
+	private String firstname;
+
 	@NotBlank
 	private String lastname;
-	
+
 	@NotBlank
 	private String address;
-	
+
 	private double latitude;
-	
+
 	private double longitude;
-	
+
 	@NotBlank
-	private String zipcode; 
-	
+	private String zipcode;
+
 	@NotBlank
-	private String email; 
-	
+	private String email;
+
 	@NotBlank
 	private String phone;
-	
+
 	// this identifies the User
 	private String createdBy;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	protected Date createdAt;
-	
+
 	public Recipient(String orderid, String firstname, String lastname, String address, double latitude,
-			double longitude, String zipcode, String email, String phone, String createdBy, Date createdAt) {
+					 double longitude, String zipcode, String email, String phone, String createdBy, Date createdAt) {
 		super();
 		this.orderid = orderid;
 		this.firstname = firstname;
@@ -75,9 +75,9 @@ public class Recipient {
 
 	public Recipient() {
 		super();
-		
+
 	}
-	
+
 	public String getOrderid() {
 		return orderid;
 	}
@@ -104,7 +104,7 @@ public class Recipient {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public double getLatitude() {
 		return latitude;
 	}

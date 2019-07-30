@@ -4,81 +4,73 @@
      * Initialize
      */
     function init() {
-        // Register event listeners
-    	onSessionInvalid();
-        $('signup-btn').addEventListener('click',signup);
+        $('login-btn').addEventListener('click', login)
+        onSessionInvalid();
     }
-    
+
     /**
-	 * Session
-	 */
+     * Session
+     */
+
+    function onSessionInvalid() {
+        var loginForm = $('login-form');
+        var logout = $('logout-link');
+        showElement(loginForm);
+        hideElement(logout);
+    }
+
+    function onSessionValid(result) {
+        var username = result.username;
+        var welcomeMsg = $('welcome-msg');
+        var registerLogin = $('register-login');
+        var logout = $('logout-link');
+        welcomeMsg.innerHTML = 'Welcome, ' + username;
+        showElement(welcomeMsg);
+        showElement(logout);
+        // hideElement(registerLogin);
+    }
 
 
-	function onSessionValid() {
-		var signupForm = $('signup-form');
-		var signupSuccess = $('signup-success');
-		showElement(signupSuccess);
-		hideElement(signupForm);
-	}
-
-	function onSessionInvalid() {
-		var signupForm = $('signup-form');
-		var signupSuccess = $('signup-success');
-		showElement(signupForm);
-		hideElement(signupSuccess);
-	}
-
-
-
-
- 	// -----------------------------------
-    // Sign up
+    // -----------------------------------
+    // Login
     // -----------------------------------
 
-    function signup() {
+    function login() {
         var username = $('username').value;
         var password = $('password').value;
-        var reenterPassword = $('re-enter-password').value;
-
-        if (username === '' || password === '' || reenterPassword === '') {
-            showSignupError('Please fill all blanks!');
-            return;
-		}
-		if (password !== reenterPassword) {
-			showSignupError('Passwords not match!');
-			return;
-		}
         password = md5(username + md5(password));
 
         // The request parameters
-        var url = '../signup';
+        var url = '../login';
         var req = JSON.stringify({
             username : username,
             password : password,
         })
 
-        console.log('url in js: ');
         ajax('POST', url, req,
             // successful callback
             function(res) {
-                onSessionValid();
+                var result = JSON.parse(res);
+                sessionStorage.setItem("username", result.username);
+                onSessionValid(result);
+                console.log('in login function');
+                window.location.href = '../';
             },
 
             // error
             function(message) {
-                showSignupError(message);
+                showLoginError(message);
             });
     }
 
 
-    function showSignupError(message) {
-        $('signup-error').innerHTML = message;
+    function showLoginError(message) {
+        $('login-error').innerHTML = message;
     }
 
-    function clearSignupError() {
+    function clearloginError() {
         $('signup-error').innerHTML = '';
     }
-
 
     // -----------------------------------
     // Helper Functions
@@ -88,7 +80,7 @@
 
     /**
      * A helper function that creates a DOM element <tag options...>
-     * 
+     *
      * @param tag
      * @param options
      * @returns
@@ -120,7 +112,7 @@
 
     /**
      * AJAX helper
-     * 
+     *
      * @param method -
      *            GET|POST|PUT|DELETE
      * @param url -
@@ -136,13 +128,14 @@
         xhr.open(method, url, true);
 
         xhr.onload = function() {
-        	if (xhr.status === 200) {
-				callback();
-			} else if (xhr.status === 403) {
-				onSessionInvalid();
-			} else {
-				errorHandler(xhr.body);
-			}
+            if (xhr.status === 200) {
+
+                callback(xhr.responseText);
+            } else if (xhr.status === 403) {
+                onSessionInvalid();
+            } else {
+                errorHandler(xhr.responseText);
+            }
 
         };
 

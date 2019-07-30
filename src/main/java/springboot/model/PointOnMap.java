@@ -1,9 +1,9 @@
 /*
- * PointOnMap (data structure): 
+ * PointOnMap (data structure):
  *     whether the point is valid
  *     its valid address acceptable by Bing Map
  *     its latitude, longitude
- *     
+ *
  * Created by: Haochen Liu
  * Modified by: Haochen Liu
  */
@@ -13,12 +13,12 @@ package springboot.model;
  * so I will leave this as it is for now
  */
 public class PointOnMap {
-	
+
 	private boolean isValid;
 	private String address;
 	private double lat = 0;
 	private double lon = 0;
-	
+
 	public PointOnMap(boolean isValid, String address, double lat, double lon) {
 		super();
 		this.isValid = isValid;
@@ -26,11 +26,11 @@ public class PointOnMap {
 		this.lat = lat;
 		this.lon = lon;
 	}
-	
+
 	public PointOnMap() {
 		super();
 	}
-	
+
 	public boolean isValid() {
 		return isValid;
 	}

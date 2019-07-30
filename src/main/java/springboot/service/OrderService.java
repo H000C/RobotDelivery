@@ -1,9 +1,9 @@
 /*
  * OrderService: services required to create an Order
- * 
+ *
  * functionalities:
  *     generating order ID from sender or recipient information
- * 
+ *
  * Created by: Haochen Liu
  * Modified by: Haochen Liu
  */
@@ -26,7 +26,7 @@ public class OrderService {
 		String orderid = initial + Long.toString(time);
 		return orderid;
 	}
-	
+
 	public static String generateOrder(Recipient recipient){
 		Date date = new Date();
 		long time = date.getTime();

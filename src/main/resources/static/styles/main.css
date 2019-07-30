@@ -1,21 +1,31 @@
 * {
     font-family: 'Inconsolata', monospace;
+    scroll-behavior:  smooth ;
 }
-  
+
 .top-header {
     border-bottom: 1px solid #e5e5e5;
 }
 
 .logo-text a {
-	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
     font-weight: 600;
-	color: black; 
-  	text-decoration: none;
+    color: black;
+    text-decoration: none;
+}
+
+#invalid-sender-address, #invalid-receiver-address, #invalid-package-dimension {
+    display:none;
 }
 
 .trackingFrm, .shippingFrm {
     padding: 2rem;
     margin: 2rem 0;
+}
+
+#shipPageMethod button {
+    background-color: darkblue;
+    border-color: darkblue;
 }
 
 footer {
@@ -26,4 +36,118 @@ footer {
     background: #efefef;
     /* position: fixed; */
     bottom: 0;
+}
+
+
+/**
+ * main container
+ */
+.container {
+    margin: 60px auto;
+    max-width: 1000px;
+    min-width: 600px;
+}
+
+/**
+ * main header
+ */
+
+.container>header p {
+    border-left: 1px solid #FFFFFF;
+    font-weight: 400;
+    font-size: 2em;
+    line-height: 1em;
+    margin-left: 220px;
+    padding-left: 5px;
+}
+
+.container>header span {
+    color: #FBAF41;
+}
+
+/**
+ * login form
+ */
+#login-form {
+    color: #624630;
+    margin: 0px auto;
+    overflow: auto;
+    padding: 40px;
+    width: 300px;
+}
+
+#login-form label {
+    display: block;
+}
+
+#login-form input {
+    /*border: none;*/
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 100%;
+}
+
+#login-form button {
+    cursor: pointer;
+    float: right;
+    padding: 8px 20px;
+    text-align: right;
+}
+
+#login-error {
+    clear: both;
+    color: #990000;
+    padding-top: 10px;
+}
+
+/**
+ * signup form
+ */
+#signup-form {
+    color: #624630;
+    margin: 0px auto;
+    overflow: auto;
+    padding: 40px;
+    width: 300px;
+}
+
+#signup-form label {
+    display: block;
+}
+
+#signup-form input {
+    /*border: none;*/
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 100%;
+}
+
+#signup-form button {
+    cursor: pointer;
+    float: right;
+    padding: 8px 20px;
+    text-align: right;
+}
+
+#signup-error {
+    clear: both;
+    color: #990000;
+    padding-top: 10px;
+}
+
+#signup-success {
+    color: #624630;
+    margin: 0px auto;
+    overflow: auto;
+    padding: 40px;
+    width: 300px;
+}
+
+#signup-success button {
+    cursor: pointer;
+    float: right;
+    padding: 8px 20px;
+    text-align: right;
 }
