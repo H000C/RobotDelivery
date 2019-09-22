@@ -1,5 +1,25 @@
 # RobotDelivery
 
+We are a logistics company that uses ground robot assistants and drones to help San Francisco users deliver small and medium-sized items. We have three distribution stations in the city. Our interaction design needs are Webapp.
+
+basic requirements:
+
+- Complete process design from login to order to transaction completion
+- Users only need to enter basic information such as items and delivery requirements to get delivery recommendations
+- The route selection recommendation should consider:
+   - route
+   - Number of available robots / drones
+   - Robot vs drone
+- Users can choose the final delivery solution they need
+- Users can get confirmation orders and tracking information after selection
+
+Advanced features:
+
+Recommend the best solution for users 
+- Fastest
+- Most expensive
+Add features that you find meaningful
+
 我们是一家物流公司，服务内容是使用地面机器人助手和无人机帮助旧金山市内用户递送中小型规格物件，我们在市内一共有3个分配站。我们的交互设计需求是Webapp。
 
 基本要求：
