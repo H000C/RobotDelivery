@@ -15,10 +15,10 @@ basic requirements:
 
 Advanced features:
 
-Recommend the best solution for users 
-- Fastest
-- Most expensive
-Add features that you find meaningful
+- Recommend the best solution for users 
+   - Fastest
+   - Most expensive
+- Add features that you find meaningful
 
 我们是一家物流公司，服务内容是使用地面机器人助手和无人机帮助旧金山市内用户递送中小型规格物件，我们在市内一共有3个分配站。我们的交互设计需求是Webapp。
 
