@@ -2,7 +2,7 @@
  * Sender Model (Dynamic Data Structure):
  *     matches attributes in the sender table
  *     automatically creates the sender table in database
- *     
+ *
  * Created by: Haochen Liu
  */
 
@@ -25,53 +25,60 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name="sender")
 @EntityListeners(AuditingEntityListener.class)
 public class Sender {
-	
+
 	@Id
 	private String  orderid;
-	
+
 	@NotBlank
-	private String firstname; 
-	
+	private String firstname;
+
 	@NotBlank
 	private String lastname;
-	
+
 	@NotBlank
 	private String address;
-	
+
+	private double latitude;
+
+	private double longitude;
+
 	@NotBlank
-	private String zipcode; 
-	
+	private String zipcode;
+
 	@NotBlank
-	private String email; 
-	
+	private String email;
+
 	@NotBlank
 	private String phone;
-	
+
 	// this identifies the User
 	private String createdBy;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	protected Date createdAt;
-	
-	public Sender(String orderid, String firstname, String lastname, String address, String zipcode, String email,
-			String phone, String createdBy, Date createdAt) {
+
+	public Sender(String orderid, String firstname, String lastname, String address, double latitude, double longitude,
+				  String zipcode, String email, String phone, String createdBy, Date createdAt) {
 		super();
 		this.orderid = orderid;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.address = address;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.zipcode = zipcode;
 		this.email = email;
 		this.phone = phone;
 		this.createdBy = createdBy;
 		this.createdAt = createdAt;
 	}
-	
+
+
 	public Sender() {
-		
+		super();
 	}
-	
+
 
 	public String getOrderid() {
 		return orderid;
@@ -81,6 +88,7 @@ public class Sender {
 		this.orderid = orderid;
 	}
 
+	public String getUsername() { return firstname + " " + lastname;}
 	public String getFirstname() {
 		return firstname;
 	}
@@ -98,6 +106,18 @@ public class Sender {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 	public String getZipcode() {
 		return zipcode;

@@ -1,3 +1,13 @@
+/*
+ * OrderService: services required to create an Order
+ *
+ * functionalities:
+ *     generating order ID from sender or recipient information
+ *
+ * Created by: Haochen Liu
+ * Modified by: Haochen Liu
+ */
+
 package springboot.service;
 
 import java.util.Date;
@@ -9,18 +19,18 @@ import springboot.model.Sender;
 
 @Service
 public class OrderService {
-	public String generateOrder(Sender sender){
+	public static String generateOrder(Sender sender){
 		Date date = new Date();
 		long time = date.getTime();
-		String initial = sender.getLastname();
+		char initial = sender.getLastname().charAt(0);
 		String orderid = initial + Long.toString(time);
 		return orderid;
 	}
-	
-	public String generateOrder(Recipient recipient){
+
+	public static String generateOrder(Recipient recipient){
 		Date date = new Date();
 		long time = date.getTime();
-		String initial = recipient.getLastname();
+		char initial = recipient.getLastname().charAt(0);
 		String orderid = initial + Long.toString(time);
 		return orderid;
 	}
